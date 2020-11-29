@@ -45,6 +45,7 @@ export default {
 
 .modal-content {
   border-radius: 0 !important;
+  z-index: 100
 }
 
 .modal-footer {
