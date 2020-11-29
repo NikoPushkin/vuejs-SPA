@@ -24,24 +24,8 @@
       </ul>
     </div>
 
-    <div class='mobile-navbar'>
-      <div v-for='elem in navbarElems' :key="elem.id">
-        <div v-if='elem == "КОНТАКТЫ"'>
-          <button @click.prevent='openNav' class='navbar-button'>
-            {{ Object.keys(elem)[0] }}
-          </button>
-        </div>
-        <div v-else-if='elem == "ОБО МНЕ"'>
-          <button v-b-modal.modal-scrollable class='navbar-button'>
-            {{ Object.keys(elem)[0] }}
-          </button>
-        </div>
-        <div v-else>
-          <button @click.prevent='scroll(elem)' class='navbar-button'>
-            {{ Object.keys(elem)[0] }}
-          </button>
-        </div>
-      </div>
+    <div class='mainPageFooter'>
+        <h4>ГАЛЕРЕЯ</h4>
     </div>
 
     <full-page :options="options" id="fullpage">
