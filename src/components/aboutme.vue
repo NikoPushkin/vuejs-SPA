@@ -41,6 +41,7 @@ export default {
 
 .modal-body {
   /* padding: 0 !important */
+  pointer-events: all !important;
 }
 
 .modal-content {

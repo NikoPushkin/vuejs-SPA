@@ -32,6 +32,9 @@
         </b-collapse>
       </div>
     </div>
+
+    <div class='mobile-photoset-container'>
+    </div>
   </section>
 </template>
 
@@ -61,8 +64,8 @@ export default {
   },
 
   created() {
-    // this.sendEmail(this.csrfToken)
-    this.getPhotosetsDescriptions()
+    this.getPhotosetsDescriptions();
+    this.sendEmail(this.csrfToken);
   },
 
   methods: {
@@ -71,7 +74,7 @@ export default {
       if (this.collapseVisibility[`${collapse}${id}`]) {
         this.collapseVisibility[`${collapse}${id}`] = !this.collapseVisibility[`${collapse}${id}`]
         if (collapse != 'subCollapse-') {
-          this.$refs[`button-${id}`][0].style.marginTop = '20%'
+          this.$refs[`button-${id}`][0].style.marginTop = '14%'
         }
       // открывает коллапс и смещает кнопку к потолку
       } else {
@@ -84,7 +87,7 @@ export default {
           // it is possible to open multiple collapses
         } else {
           this.collapseVisibility[`${collapse}${id}`] = !this.collapseVisibility[`${collapse}${id}`]
-          this.$refs[`button-${id}`][0].style.marginTop = '4%'
+          this.$refs[`button-${id}`][0].style.marginTop = '1%'
         }
       }
 
@@ -94,7 +97,7 @@ export default {
       let response = await fetch('http://127.0.0.1:8000/api/get-descriptions');
       if (response.ok) {
         let json = await response.json();
-        this.services = json
+        this.services = json;
       } else {
         console.log('Error' + response.status);
         return;
@@ -102,17 +105,18 @@ export default {
     },
 
     async sendEmail(token) {
-      const request = new Request(
+      console.log('TOKEN: ', token);
+      var request = new Request(
               'http://127.0.0.1:8000/api/send-email',
-              {headers: {'X-CSRFToken': token}}
-            )
-      let data = this.emailForm
+              {headers: {'X-CSRFToken': token }}
+            );
+      let data = this.emailForm;
       let response = await fetch(request, {
                                   method: 'POST',
                                   body: JSON.stringify(data),
                                   credentials: 'include'
-                                })
-      return response
+                                });
+      return response;
     },
   }
 }
@@ -142,7 +146,7 @@ export default {
 }
 
 .button-bar {
-  margin-top: 20%;
+  margin-top: 14%;
   transition: .4s
 
 }

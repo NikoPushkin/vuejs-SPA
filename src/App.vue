@@ -24,9 +24,6 @@
       </ul>
     </div>
 
-    <div class='mainPageFooter'>
-        <h4>ГАЛЕРЕЯ</h4>
-    </div>
 
     <full-page :options="options" id="fullpage">
       <div class="section">
@@ -51,9 +48,15 @@
             </table>
           </div>
       </div>
-
-
     </full-page>
+    <div class='mainPageFooter'>
+      <h4>Veronika Vegera Photography</h4>
+      <!-- <div class="">
+        <a href="https://www.instagram.com/vegeraveronika"><i class="fab fa-instagram"></i></a>
+        <a href="https://vk.com/vegeraveronika"><i class="fab fa-vk"></i></a>
+        <a href="https://t.me/lumosphoto"><i class="fab fa-telegram"></i></a>
+      </div> -->
+    </div>
   </div>
 </template>
 
@@ -102,7 +105,8 @@ export default {
       }
     },
     created() {
-      this.csrfToken = this.getCookie('csrftoken')
+      this.csrfToken = this.getCookie('csrftoken');
+      console.log(this.csrfToken);
     },
     watch: {
     },

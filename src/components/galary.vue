@@ -44,11 +44,11 @@ export default {
           clickable: true
         },
         breakpoints: {
-          1024: {
+          1600: {
             slidesPerView: 3,
             spaceBetween: 40,
           },
-          768: {
+          1280: {
             slidesPerView: 2,
             spaceBetween: 30,
             slidesPerGroup: 2,
@@ -68,20 +68,21 @@ export default {
 <style  scoped>
 
 .swiper {
-  height: 70%;
+  height: 100%;
   width: 90%;
 }
 
 .swiper-slide {
   display: flex;
   justify-content: center;
-  align-items: center;
-  text-align: center;
+  clip-path: inset(0 0 0 0);
 }
+
 .swiper-slide img {
-  width: 100%;
-  padding: 0px 20px;
-  /* height: 800px; */
+  /* width: auto; */
+  /* max-width: 60vh;1 */
+  /* padding: 0px 20px; */
+  height: 90%;
   object-fit: cover !important;
   transition: 0.4s;
 }
