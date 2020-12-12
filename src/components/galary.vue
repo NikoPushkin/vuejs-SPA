@@ -1,13 +1,13 @@
 <template>
-    <swiper class="swiper" :options="swiperOption">
+    <swiper ref='mySwiperRef' class="swiper" :options="swiperOption">
       <swiper-slide v-for='image in photoSetSources' :key='image.id'>
         <!-- <div> -->
           <img ref='sliderImage' :src="image">
         <!-- </div> -->
       </swiper-slide>
-      <!-- <div class="swiper-pagination" slot="pagination"></div>
-      <div class="swiper-button-prev" slot="button-prev"></div>
-      <div class="swiper-button-next" slot="button-next"></div> -->
+      <!-- <div class="swiper-pagination" slot="pagination"></div> -->
+      <div class="swiper-button-prev" @click='prev' slot="button-prev"></div>
+      <div class="swiper-button-next" @click='next' slot="button-next"></div>
     </swiper>
 
 
@@ -39,10 +39,7 @@ export default {
         slidesPerView: 3,
         slidesPerGroup: 3,
         spaceBetween: 30,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true
-        },
+        loop: true,
         breakpoints: {
           1600: {
             slidesPerView: 3,
@@ -58,10 +55,17 @@ export default {
             slidesPerGroup: 1,
             spaceBetween: 20,
           },
-
-        }
+        },
       },
     }
+  },
+  methods: {
+    next() {
+      this.$refs.mySwiperRef.$swiper.slideNext()
+    },
+    prev() {
+      this.$refs.mySwiperRef.$swiper.slidePrev()
+    },
   },
 }
 </script>
