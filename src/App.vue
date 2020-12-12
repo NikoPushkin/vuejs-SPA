@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <AboutMeComponent></AboutMeComponent>
     <div class='full-navbar-container'>
       <ul class='full-navbar'>
         <li
@@ -27,6 +26,10 @@
 
     <full-page :options="options" id="fullpage">
       <div class="section">
+        <AboutMeComponent></AboutMeComponent>
+      </div>
+
+      <div class="section">
         <GalaryComponent></GalaryComponent>
       </div>
       <div class="section">
@@ -51,11 +54,11 @@
     </full-page>
     <div class='mainPageFooter'>
       <h4>Veronika Vegera Photography</h4>
-      <!-- <div class="">
+      <div class="">
         <a href="https://www.instagram.com/vegeraveronika"><i class="fab fa-instagram"></i></a>
         <a href="https://vk.com/vegeraveronika"><i class="fab fa-vk"></i></a>
         <a href="https://t.me/lumosphoto"><i class="fab fa-telegram"></i></a>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -83,15 +86,14 @@ export default {
         scrollBar: false,
         menu: '#menu',
         navigation: true,
-        anchors: ['/about', '/photoset', '/education'],
+        anchors: ['/about', '/galary', '/photoset', '/education'],
         sectionsColor: ['#FFFFFF  ', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#1bcee6', '#ee1a59', '#2c3e4f', '#ba5be9', '#b4b8ab']
       },
       navbarElems: [
-        { 'ОБО МНЕ': '/about' },
-        // { 'ГАЛЕРЕЯ': '/galary' },
-        { 'ОБУЧЕНИЕ': '/education' },
+        { 'ГЛАВНАЯ': '/about' },
+        { 'ГАЛЕРЕЯ': '/galary' },
         { 'CЪЕМКА': '/photoset' },
-        { 'КОНТАКТЫ': 'null'}
+        { 'ОБУЧЕНИЕ': '/education' },
       ],
 
       contactsList: [
