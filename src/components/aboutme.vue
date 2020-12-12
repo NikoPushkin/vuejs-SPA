@@ -1,28 +1,31 @@
 <template>
-  <div>
-    <b-modal id="modal-scrollable" centered button-size='400' hide-header ok-only ok-variant='light' ok-title='ЗАКРЫТЬ'>
+  <!-- <div> -->
+    <!-- <b-modal id="modal-scrollable" centered button-size='400' hide-header ok-only ok-variant='light' ok-title='ЗАКРЫТЬ'> -->
       <div class="card-container">
-        <h1 class="heading"></h1>
           <div class="card-wrapper">
-            <div class="card">
-              <img src="/images/background.jpg" alt="card background" class='card-img'>
+            <div class="card-left">
+              <div class="card-left-text">
+                <h1>Вероника Вегера</h1>
+                <p class='job-title'>Фотограф</p>
+                <p class='about'>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                  in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                  officia deserunt mollit anim id est laborum.
+                </p>
+              </div>
+            </div>
+            <div class="card-right">
               <img src="/images/avatar.jpg" alt="profiile-img" class='profile-img'>
-              <h1>Вероника Вегера</h1>
-              <p class='job-title'>Фотограф</p>
-              <p class='about'>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                officia deserunt mollit anim id est laborum.
-              </p>
+              <img src="/images/background.jpg" alt="card background" class='card-img'>
             </div>
           </div>
       </div>
-    </b-modal>
-  </div>
+    <!-- </b-modal> -->
+  <!-- </div> -->
 </template>
 
 <script>
@@ -39,89 +42,88 @@ export default {
 
 <style media="screen">
 
-.modal-body {
-  /* padding: 0 !important */
-  pointer-events: all !important;
-}
-
-.modal-content {
-  border-radius: 0 !important;
-  z-index: 100
-}
-
-.modal-footer {
-  justify-content: center !important;
-  padding: 1px !important;
-}
-.modal-footer .btn {
-  border-radius: 0 !important;
-  background-color: white;
-  color: black;
-  letter-spacing: 0.5px;
-  width: 50%;
-  border: none;
-}
-
-.modal-footer .btn:hover {
-  background-color: black;
-  color: white
+.card-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 10vh;
+  height: 80%;
+  width: 100%
 }
 
 .card-wrapper {
+  position: relative;
+  height: 100%;
+  width: 90%;
   display: flex;
-  align-items: center;
-  align-content: center;
-  flex-direction: column;
-}
-
-.card {
-  width: 100%;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0rem 0;
 }
 
-.card .card-img {
+.card-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+  align-items: flex-start;
+  background-color: #e3e0e040
+}
+
+.card-left-text {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: center;
+}
+
+.card-right {
+  width: 50%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  border: none !important;
+}
+
+.card-right .card-img {
   width: 100%;
-  height: 15rem;
+  height: 100%;
   object-fit: cover;
   clip-path: inset(0 0 0 0);
 }
 
 .profile-img {
-  width: 10rem;
-  height: 10rem;
+  position: absolute;
+  width: 18rem;
+  height: 18rem;
+  margin-left: -9rem;
+  margin-top: 25vh;
   object-fit: cover;
   border-radius: 50%;
-  margin-top: -5rem;
   z-index: 1;
   border: 0.2rem solid white
 
 }
 
-.card h1 {
-  font-size: 2rem;
+.card-left-text h1 {
   color: #333;
-  margin: 1rem 0;
 }
 
 .job-title {
   color: #777;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 300;
-  margin-bottom: 1rem
+  margin-bottom: 1.4rem;
 }
 
 .about {
-  margin-top: 0;
-  font-size: 1rem;
+  width: 80%;
+  font-size: 1.2rem;
   font-style: italic;
   text-align: center;
   color: #333;
-  padding: 0 5px;
 }
 
 @media screen and (max-width: 300px){
@@ -136,16 +138,16 @@ export default {
     border: none
   }
 
-  .card {
+  .card-right {
     border: none !important;
 
   }
 
-  .card .card-img {
+  .card-right .card-img {
     height: 12rem;
   }
 
-  .card h1 {
+  .card-right h1 {
     font-size: 1.5rem;
     margin: 0.5rem 0
   }
