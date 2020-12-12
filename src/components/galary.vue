@@ -83,40 +83,8 @@ export default {
 }
 
 .swiper-slide img {
-  /* width: auto; */
-  /* max-width: 60vh;1 */
-  /* padding: 0px 20px; */
   height: 90%;
   object-fit: cover !important;
   transition: 0.4s;
 }
-
-/* @media only screen and (max-width: 1640px) {
-  .swiper-slide img {
-    width: 500px;
-    height: 500px;
-    object-fit: cover !important;
-    transition: 0.4s;
-  }
-}
-
-@media only screen and (max-width: 1400px) {
-  .swiper-slide img {
-    width: 350px;
-    height: 500px;
-    object-fit: cover !important;
-    transition: 0.4s;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .swiper-slide img {
-    width: 100%;
-    max-width: 600px;
-    height: 400px;
-    object-fit: cover !important;
-    transition: 0.4s;
-  }
-} */
-
 </style>
