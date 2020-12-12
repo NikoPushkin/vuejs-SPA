@@ -13,7 +13,7 @@ body {
 
 .mainPageFooter {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   position:  sticky;
   width: 100%;
   color: black;
@@ -100,13 +100,15 @@ body {
     padding: 0px;
   }
 
-  .full-navbar {
-    /* padding: 3vh 0vh; */
+  .mainPageFooter {
+    flex-direction: column;
   }
 
   .mainPageFooter h4 {
     font-size: 1rem;
-    /* padding: 3vh 0vh */
+  }
+  .mainPageFooter a {
+    font-size: 1rem;
   }
 }
 @media only screen and (max-width: 399px) {
@@ -119,13 +121,16 @@ body {
     padding: 0px;
   }
 
-  .full-navbar {
-    /* padding: 2vh 0vh; */
+  .mainPageFooter {
+    flex-direction: column;
   }
 
   .mainPageFooter h4 {
-    /* padding: 2vh 0vh; */
     font-size: 0.8rem;
+  }
+
+  .mainPageFooter a {
+    font-size: 1rem;
   }
 }
 @media only screen and (max-width: 320px) {
@@ -138,9 +143,17 @@ body {
     padding: 0px;
   }
 
+  .mainPageFooter {
+    flex-direction: column;
+  }
+
   .mainPageFooter h4 {
     /* padding: 2vh 0vh; */
     font-size: 0.7rem;
+  }
+
+  .mainPageFooter a {
+    font-size: 1rem;
   }
 }
 
