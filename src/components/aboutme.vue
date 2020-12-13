@@ -126,6 +126,20 @@ export default {
   color: #333;
 }
 
+.swiper-button-next, .swiper-button-prev {
+  color: white !important;
+  padding: 5px !important;
+  border-radius: 50%;
+  width: calc(var(--swiper-navigation-size) / 18 * 27) !important;
+  height: calc(var(--swiper-navigation-size)*1.5) !important;
+  transition: 0.4s;
+}
+
+.swiper-button-next:hover, .swiper-button-prev:hover {
+  background-color: #e3e0e040;
+  transform: scale(1.1, 1.1);
+}
+
 @media screen and (max-width: 300px){
   .card-wrapper {
     flex-direction: row;
