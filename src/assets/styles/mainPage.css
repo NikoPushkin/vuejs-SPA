@@ -6,6 +6,10 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.iScrollIndicator {
+  display: none !important; 
+}
 /* NAVBAR  NAVBAR NAVBAR NAVBAR NAVBAR */
 
 /* Move table div to center */
