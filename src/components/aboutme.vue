@@ -1,6 +1,7 @@
 <template>
   <!-- <div> -->
     <!-- <b-modal id="modal-scrollable" centered button-size='400' hide-header ok-only ok-variant='light' ok-title='ЗАКРЫТЬ'> -->
+    <div class="aboutme-container">
       <div class="card-container">
           <div class="card-wrapper">
             <div class="card-left">
@@ -24,6 +25,44 @@
             </div>
           </div>
       </div>
+      <div class="mobile-card-container">
+        <div class="mobile-card-wrapper">
+          <img src="/images/avatar.jpg" alt="profiile-img" class='mobile-profile-img'>
+          <div class="sidebar-btn">
+            <p class="main-about-text">
+              <span>Veronika Vegera</span>
+              <span>Photography</span>
+            </p>
+            <button v-b-toggle.sidebar-1>ОБО МНЕ</button>
+          </div>
+          <b-sidebar id="sidebar-1" title="Приветствую тебя на моем сайте!" cshadow>
+            <div class="px-3 py-2">
+              <p>
+                Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
+                in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+              </p>
+            </div>
+          </b-sidebar>
+        </div>
+        <!-- <div class="mobile-card-wrapper">
+          <div class="card">
+            <img src="/images/background.jpg" alt="card background" class='mobile-card-img'>
+            <img src="/images/avatar.jpg" alt="profiile-img" class='mobile-profile-img'>
+            <h1>Вероника Вегера</h1>
+            <p class='mobile-job-title'>Фотограф</p>
+            <p class='mobile-about'>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+              in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+              officia deserunt mollit anim id est laborum.
+            </p>
+          </div>
+        </div> -->
+      </div>
+    </div>
     <!-- </b-modal> -->
   <!-- </div> -->
 </template>
@@ -41,6 +80,21 @@ export default {
 </script>
 
 <style media="screen">
+
+/*
+
+* DESKTOP ABOUTME PAGE STYLES
+
+ */
+
+
+.aboutme-container {
+  width: 100%;
+  height: 100%;
+}
+.mobile-card-container {
+  display: none;
+}
 
 .card-container {
   position: relative;
@@ -140,28 +194,28 @@ export default {
   transform: scale(1.1, 1.1);
 }
 
-@media screen and (max-width: 300px){
-  .card-wrapper {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-  }
+/*
 
-  .modal-body{
-    border: none
-  }
+* DESKTOP ABOUTME PAGE STYLES
+********************************************************************************
+ */
 
-  .card-right {
-    border: none !important;
 
-  }
+/*
 
-  .card-right .card-img {
+* MOBILE ABOUTME PAGE STYLES
+
+ */
+
+@media screen and (max-width: 1200px){
+  .profile-img {
+    width: 12rem;
     height: 12rem;
+    margin-left: -6rem;
+    margin-top: 28vh;
   }
 
-  .card-right h1 {
+  .card-left h1 {
     font-size: 1.5rem;
     margin: 0.5rem 0
   }
@@ -169,6 +223,102 @@ export default {
   .about {
     font-size: 0.8rem;
     margin: 2px
+  }
+}
+
+
+@media screen and (max-width: 800px){
+  .card-container {
+    display: none;
+  }
+
+  .mobile-card-container {
+    position: absolute;
+    display: block;
+    height: 80vh;
+    width: 100%;
+    margin-top: 10vh
+  }
+
+  .mobile-card-wrapper {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+  }
+
+  .card {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-profile-img {
+    clip-path: inset(0 0 0 0);
+    width: 90%;
+    height: 80vh;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  .b-sidebar {
+    height: 80vh !important;
+    top: 10vh !important;
+    width: 100% !important;
+    text-align:justify !important;
+    word-break:keep-all !important;
+  }
+
+  .b-sidebar-header {
+    /* text-align: center !important; */
+  }
+
+  .sidebar-btn {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 80vh;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    text-align: center;
+    padding-top: 7em
+  }
+
+  .sidebar-btn button {
+    padding: 0px 35px;
+    background-color: white;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 1.6em;
+    letter-spacing: 8px
+  }
+
+  .main-about-text span {
+    display: block;
+  }
+
+  .main-about-text span:first-of-type {
+    margin-bottom: -10px;
+    letter-spacing: 7px;
+    font-size: 1.2em;
+  }
+
+  .main-about-text span:last-of-type {
+    margin-bottom: -10px;
+    letter-spacing: 8px;
+    font-weight: bold;
+    font-size: 1.6em;
   }
 }
 </style>
