@@ -78,6 +78,7 @@ export default {
 
 .swiper-slide {
   display: flex;
+  margin-top: 5vh;
   justify-content: center;
   clip-path: inset(0 0 0 0);
 }
