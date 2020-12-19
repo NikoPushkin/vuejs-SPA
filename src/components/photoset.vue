@@ -9,8 +9,8 @@
         <b-collapse :class='"collapse-"+index' v-model='collapseVisibility["collapse-"+index]'
                     style='color: black;' class="mt-2"
                     >
-          <b-card style="max-width: 22rem;" class='pl-0'>
-            <p class='about'>
+          <b-card style="max-width: 100%" class='pl-0'>
+            <p class='about-photoset'>
               {{ Object.values(service)[1] }}
 
             </p>
@@ -34,13 +34,55 @@
     </div>
 
     <div class='mobile-photoset-container'>
+      <swiper ref='mySwiperRef' class="photoset-swiper" :options="swiperOption">
+        <swiper-slide class='mobile-photoset-slide' v-for='(service, index) in services' :key='service.id'>
+          <div class="mobile-service-container">
+            <b-card class='mobile-photoset-card'>
+                <p>
+                  <span>{{ Object.values(service)[0] }}</span>
+                  <span>{{ Object.values(service)[1] }}</span>
+                </p>
+
+
+              <b-card-text class='mobile-job-title'
+                >
+                {{ Object.values(service)[2] }}&#8381;
+                <div class='book-service'
+                  @click='collapseVisibilityControl("subCollapse-", index)'
+                  >
+                  <i class="fas fa-feather-alt book-icon"></i>
+                </div>
+              </b-card-text>
+              <b-collapse v-model='collapseVisibility["subCollapse-"+index]' class="mt-2">
+                <b-form-input required type="text" placeholder="Как Вас зовут?"></b-form-input>
+                <b-form-input required class='mt-2' type="email" placeholder="Укажите email для связи с Вами"></b-form-input>
+                <button style='height: 2rem; width: 100%; margin-top: 0.5rem;'>Отправить</button>
+              </b-collapse>
+            </b-card>
+          </div>
+          <!-- <div> -->
+            <!-- <img ref='sliderImage' :src="image"> -->
+          <!-- </div> -->
+        </swiper-slide>
+        <!-- <div class="swiper-pagination" slot="pagination"></div> -->
+        <div class="swiper-button-prev" @click='prev' slot="button-prev"></div>
+        <div class="swiper-button-next" @click='next' slot="button-next"></div>
+      </swiper>
     </div>
   </section>
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+
+import 'swiper/swiper-bundle.css'
+
 export default {
   name: 'PhotoSet',
+  components: {
+    Swiper,
+    SwiperSlide
+  },
   props: {
     csrfToken: String
   },
@@ -59,6 +101,12 @@ export default {
         message_name: 'ololololo',
         message_email: 'nikopushkin1@gmail.com',
         message: 'hehehehehehe'
+      },
+      swiperOption: {
+        slidesPerView: 1,
+        slidesPerGroup: 1,
+        spaceBetween: 30,
+        loop: true,
       }
     }
   },
@@ -74,22 +122,22 @@ export default {
       if (this.collapseVisibility[`${collapse}${id}`]) {
         this.collapseVisibility[`${collapse}${id}`] = !this.collapseVisibility[`${collapse}${id}`]
         if (collapse != 'subCollapse-') {
-          this.$refs[`button-${id}`][0].style.marginTop = '14%'
+          this.$refs[`button-${id}`][0].style.marginTop = '20%'
         }
       // открывает коллапс и смещает кнопку к потолку
-      } else {
-        // let stay opened only one collapse at the moment
-        if (this.$refs['photocont'].clientWidth < 1200 && collapse != 'subCollapse-') {
-          for (let i in this.collapseVisibility) {
-            this.collapseVisibility[i] = false
-          }
-          this.collapseVisibility[`${collapse}${id}`] = !this.collapseVisibility[`${collapse}${id}`]
-          // it is possible to open multiple collapses
+      // } else {
+      //   // let stay opened only one collapse at the moment
+      //   if (this.$refs['photocont'].clientWidth < 1200 && collapse != 'subCollapse-') {
+      //     for (let i in this.collapseVisibility) {
+      //       this.collapseVisibility[i] = false
+      //     }
+      //     this.collapseVisibility[`${collapse}${id}`] = !this.collapseVisibility[`${collapse}${id}`]
+      //     // it is possible to open multiple collapses
         } else {
           this.collapseVisibility[`${collapse}${id}`] = !this.collapseVisibility[`${collapse}${id}`]
-          this.$refs[`button-${id}`][0].style.marginTop = '1%'
-        }
+          this.$refs[`button-${id}`][0].style.marginTop = '10vh'
       }
+      // }
 
     },
     // get services descriptions
@@ -118,11 +166,22 @@ export default {
                                 });
       return response;
     },
+
+    next() {
+      this.$refs.mySwiperRef.$swiper.slideNext()
+    },
+    prev() {
+      this.$refs.mySwiperRef.$swiper.slidePrev()
+    },
   }
 }
 </script>
 
 <style media="screen">
+.mobile-photoset-container {
+  display: none
+}
+
 .job-title {
   text-align: center;
   color: #777;
@@ -134,31 +193,34 @@ export default {
 .about {
   margin-top: 0;
   font-size: 1rem;
-  text-align: justify;
   color: #333;
 }
 
 .photoset-cont {
-  /* background-color: white; */
+  width: 90%;
+  margin-left: 5%;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: justify;
 }
 
 .button-bar {
-  margin-top: 14%;
-  transition: .4s
-
+  width: 33% !important;
+  margin-top: 20%;
+  transition: .4s;
 }
 
 .button-bar button {
-  background-color: black;
+  background-color: white;
+  /* background: rgba(0, 0, 0, 0.5); */
   letter-spacing: 1px;
   position: sticky;
   clip-path: polygon(40 0 0 0);
-  width: 22rem;
-  height: 10rem;
-  color: white;
+  width: 100%;
+  height: 3rem;
+  color: black;
   font-size: 1.3rem;
   outline: none;
   border: none;
@@ -186,10 +248,10 @@ button:focus {
   outline: none !important;
 }
 
-.button-1, .collapse-1 {
-  margin-right: 5vh;
-  margin-left: 5vh
-}
+/* .button-1, .collapse-1 {
+  margin-right: 5%;
+  margin-left: 5%
+} */
 
 .button-bar button:hover {
   transform: scale(1.1, 1.1);
@@ -197,39 +259,79 @@ button:focus {
 
 @media screen and (max-width: 1200px){
   .photoset-cont {
+    display: none
+  }
+
+  .mobile-photoset-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
     align-items: center;
-    flex-direction: column;
-    justify-content: flex-start;
   }
 
-  .button-1, .collapse-1 {
-    margin-right: 0px;
-    margin-left: 0px
+  .photoset-swiper {
+    width: 90%;
+    height: 100vh;
   }
 
-  .button-bar {
-    margin-top: 2% !important;
+  .mobile-photoset-slide {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    text-align: justify;
+  }
+
+  .mobile-photoset-card {
+    max-height: 80vh;
+  }
+
+  .card-body {
+    padding: 1rem !important
+  }
+
+  .mobile-about-photoset {
+    margin: 0
+  }
+
+  .mobile-photoset-card span {
+    display: block;
+  }
+
+  .mobile-photoset-card span:first-of-type {
+    margin-bottom: -10px;
+    letter-spacing: 3px;
+    font-size: 0.9em;
+    font-weight: bold;
+    padding-bottom: 1rem;
     text-align: center;
   }
 
-  .button-bar button:hover {
-    transform: scale(1.02, 1.02);
+  .mobile-photoset-card span:last-of-type {
+    margin-bottom: -10px;
+    letter-spacing: 2px;
+    font-size: 0.8em;
+  }
+
+  .mobile-job-title {
+    margin-top: 1rem !important;
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  .mobile-photoset-container button {
+    background-color: white;
+    /* background: rgba(0, 0, 0, 0.5); */
+    letter-spacing: 1px;
+    position: sticky;
+    clip-path: polygon(40 0 0 0);
+    width: 100%;
+    height: 3rem;
+    color: black;
+    font-size: 1.3rem;
+    outline: none;
+    border: none;
+    transition: .4s
   }
 }
-
-/* iphone 5 screen */
-@media screen and (max-width: 320px){
-  .button-bar button {
-    width: 19rem;
-  }
-}
-/* galaxy fold screen */
-@media screen and (max-width: 280px){
-  .button-bar button {
-    width: 17rem;
-  }
-}
-
-
-
 </style>
