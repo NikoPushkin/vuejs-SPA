@@ -9,7 +9,7 @@
         <b-collapse :class='"collapse-"+index' v-model='collapseVisibility["collapse-"+index]'
                     style='color: black;' class="mt-2"
                     >
-          <b-card style="max-width: 100%" class='pl-0'>
+          <b-card style="max-width: 100%" class='photoset-card pl-0'>
             <p class='about-photoset'>
               {{ Object.values(service)[1] }}
 
@@ -122,7 +122,7 @@ export default {
       if (this.collapseVisibility[`${collapse}${id}`]) {
         this.collapseVisibility[`${collapse}${id}`] = !this.collapseVisibility[`${collapse}${id}`]
         if (collapse != 'subCollapse-') {
-          this.$refs[`button-${id}`][0].style.marginTop = '20%'
+          this.$refs[`button-${id}`][0].style.marginTop = '45vh'
         }
       // открывает коллапс и смещает кнопку к потолку
       // } else {
@@ -135,7 +135,7 @@ export default {
       //     // it is possible to open multiple collapses
         } else {
           this.collapseVisibility[`${collapse}${id}`] = !this.collapseVisibility[`${collapse}${id}`]
-          this.$refs[`button-${id}`][0].style.marginTop = '10vh'
+          this.$refs[`button-${id}`][0].style.marginTop = '15vh'
       }
       // }
 
@@ -187,7 +187,7 @@ export default {
   color: #777;
   font-size: 1.2rem;
   font-weight: 300;
-  margin-bottom: 1rem
+  margin-bottom: 1rem;
 }
 
 .about {
@@ -208,12 +208,12 @@ export default {
 
 .button-bar {
   width: 33% !important;
-  margin-top: 20%;
+  margin-top: 45vh;
   transition: .4s;
 }
 
 .button-bar button {
-  background-color: white;
+  background: none;
   /* background: rgba(0, 0, 0, 0.5); */
   letter-spacing: 1px;
   position: sticky;
