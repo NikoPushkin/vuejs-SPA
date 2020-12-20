@@ -1,61 +1,24 @@
 <template>
   <section id='ОБУЧЕНИЕ' class='course-sect'>
-    <!-- <div class='course-cont'>
-      <h4>
-        Программа:
-        <br>
-        День №1
-        Портрет, понятие его жанров.
-<br>
-<br>
-<br>
+    <div class="photosets-container">
+      <div class="photoset-titles">
+        <p>dasd</p>
+        <p>dasd</p>
+        <p>dasd</p>
+        <b-button @click='openSidebar()'>Toggle Sidebar</b-button>
 
-        Свет. Основы. Разбор естественного света. Световая иерархия, как работать с любым источником света?
-<br>
+      </div>
 
+      <div ref='photosetSidebar' class="photoset-description" id='photoset-sidebar'>
+        <div class="sidebar-content">
+          <p>dasd</p>
+          <p>dasd</p>
+          <b-button @click='closeSidebar()'>cl</b-button>
+        </div>
 
-        Референс как путь к собственному стилю, как грамотно составлять мудборд, вдохновение без задержек. Творческая дисциплина.
-        <br>
-        <br>
+      </div>
 
-        <br>
-        День №2
-        Грамотное планирование съемки, подробный разбор нюансов подготовки к процессу.
-        Методы поиска локаций, моделей, одежды.
-
-
-<br>
-
-        Модель, кто это? Основные понятия, особенности работы с профессиональными и непрофессиональными моделями. Какие ошибки вы можете допустить при работе в обеих случаях. Рабочая этика,
-
-<br>
-
-        Проблемы и конфликтные ситуации, как избежать. Влияние на психологическое состояние модели. Особенности сотрудничества с Визажистом/стилистом.
-        Работа с моделью на съемке, установление психологического контакта Фотограф-модель. Как добиться эмоций, чувственности. Завершение съемки, почему важно получить обратную связь.
-<br>
-<br>
-
-<br>
-
-        День №3
-        Работа с цветом. Основные понятия, цветовые гармонии, композиция цвета.
-
-<br>
-
-        Обработка. Lightroom: Инструменты для цветокоррекции снимков, применение. Тоновая кривая, принципы работы. Основные приемы колористики, как применять их в фотографии. Экспорт фотографий. Свободные вопросы.
-<br>
-
-
-        Photoshop: Ретушь «Без ретуши» деликатный способ устранения нюансов с естественным эффектом.
-         Коррекция формы, работа с инструментом «пластика», как и где применяю. Устранение лишних деталей с кадра, резкость, объем и блики.
-
-<br>
-
-
-        Портфолио Ревю. Рекомендации и свободные вопросы.
-      </h4>
-
-    </div> -->
+    </div>
   </section>
 </template>
 
@@ -64,5 +27,60 @@ export default {
   name: 'EducationComponent',
   props: {
   },
+  methods: {
+    openSidebar() {
+      console.log(this.$refs);
+      this.$refs.photosetSidebar.style.width='50%'
+      this.$refs.photosetSidebar.children[0].style.visibility = 'visible'
+    },
+    closeSidebar() {
+      this.$refs.photosetSidebar.style.width='0px'
+      this.$refs.photosetSidebar.children[0].style.visibility = 'hidden'
+
+    }
+  }
 }
 </script>
+
+<style media="screen">
+  .course-sect {
+    background-color: white !important;
+    height: 100vh;
+  }
+
+  .photosets-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin-left: 5%;
+    top: 10vh;
+    height: 80vh;
+    background-size: cover;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/background2.jpg');
+  }
+
+  .photoset-titles {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    heigth: 100%;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .photoset-description {
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    background-color: transition;
+    transition: 0.4s;
+    transform: translateX(0);
+    right: 0 !important;
+    left: auto;
+  }
+  .sidebar-content {
+    visibility: hidden;
+    transition: 0.3s
+  }
+</style>

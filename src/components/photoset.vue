@@ -1,6 +1,7 @@
 <template>
   <section id='CЪЕМКА'>
     <div class='photoset-cont' ref='photocont'>
+      <!-- <img src="/images/background2.jpg" alt=""> -->
       <div class="button-bar" :ref='"button-"+index' :key='service.id' v-for='(service, index) in services'>
         <button :class='"button-"+index' @click='collapseVisibilityControl("collapse-", index)'
                 >
@@ -9,7 +10,7 @@
         <b-collapse :class='"collapse-"+index' v-model='collapseVisibility["collapse-"+index]'
                     style='color: black;' class="mt-2"
                     >
-          <b-card style="max-width: 100%" class='photoset-card pl-0'>
+          <b-card style="max-width: 100%; border-radius: 0;" class='photoset-card pl-0'>
             <p class='about-photoset'>
               {{ Object.values(service)[1] }}
 
@@ -135,7 +136,7 @@ export default {
       //     // it is possible to open multiple collapses
         } else {
           this.collapseVisibility[`${collapse}${id}`] = !this.collapseVisibility[`${collapse}${id}`]
-          this.$refs[`button-${id}`][0].style.marginTop = '15vh'
+          this.$refs[`button-${id}`][0].style.marginTop = '25vh'
       }
       // }
 
@@ -185,15 +186,20 @@ export default {
 .job-title {
   text-align: center;
   color: #777;
-  font-size: 1.2rem;
-  font-weight: 300;
+  /* font-size: 2rem; */
+  /* font-weight: 300; */
   margin-bottom: 1rem;
 }
 
-.about {
-  margin-top: 0;
-  font-size: 1rem;
-  color: #333;
+.photoset-card {
+  background: none !important
+
+}
+
+.photoset-card p{
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white
 }
 
 .photoset-cont {
@@ -204,6 +210,9 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   text-align: justify;
+  background-size: cover;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/background2.jpg');
+
 }
 
 .button-bar {
@@ -214,14 +223,14 @@ export default {
 
 .button-bar button {
   background: none;
-  /* background: rgba(0, 0, 0, 0.5); */
   letter-spacing: 1px;
   position: sticky;
   clip-path: polygon(40 0 0 0);
   width: 100%;
   height: 3rem;
-  color: black;
-  font-size: 1.3rem;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
   outline: none;
   border: none;
   transition: .4s
@@ -269,6 +278,7 @@ button:focus {
     justify-content: center;
     align-items: center;
   }
+
 
   .photoset-swiper {
     width: 90%;
@@ -321,7 +331,6 @@ button:focus {
 
   .mobile-photoset-container button {
     background-color: white;
-    /* background: rgba(0, 0, 0, 0.5); */
     letter-spacing: 1px;
     position: sticky;
     clip-path: polygon(40 0 0 0);
