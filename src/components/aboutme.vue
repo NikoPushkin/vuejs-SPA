@@ -27,15 +27,15 @@
       </div>
       <div class="mobile-card-container">
         <div class="mobile-card-wrapper">
-          <img src="/images/avatar.jpg" alt="profiile-img" class='mobile-profile-img'>
+          <img src="/images/avatar.jpg" alt="profile-img" class='mobile-profile-img'>
           <div class="sidebar-btn">
             <p class="main-about-text">
               <span>Veronika Vegera</span>
               <span>Photography</span>
             </p>
-            <button v-b-toggle.sidebar-1>ОБО МНЕ</button>
+            <button v-b-toggle.mainpage-sidebar>ОБО МНЕ</button>
           </div>
-          <b-sidebar id="sidebar-1" title="Приветствую тебя на моем сайте!" cshadow>
+          <b-sidebar id="mainpage-sidebar" title="Приветствую тебя на моем сайте!" cshadow>
             <div class="px-3 py-2">
               <p>
                 Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
@@ -44,27 +44,8 @@
             </div>
           </b-sidebar>
         </div>
-        <!-- <div class="mobile-card-wrapper">
-          <div class="card">
-            <img src="/images/background.jpg" alt="card background" class='mobile-card-img'>
-            <img src="/images/avatar.jpg" alt="profiile-img" class='mobile-profile-img'>
-            <h1>Вероника Вегера</h1>
-            <p class='mobile-job-title'>Фотограф</p>
-            <p class='mobile-about'>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-              in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum.
-            </p>
-          </div>
-        </div> -->
       </div>
     </div>
-    <!-- </b-modal> -->
-  <!-- </div> -->
 </template>
 
 <script>
@@ -265,7 +246,7 @@ export default {
     z-index: 1;
   }
 
-  .b-sidebar {
+  #mainpage-sidebar {
     height: 80vh !important;
     top: 10vh !important;
     width: 100% !important;
