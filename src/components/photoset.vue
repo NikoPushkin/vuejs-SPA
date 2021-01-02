@@ -120,10 +120,6 @@ export default {
     transition: 0.2s
   }
 
-  /* .photoset-btn:hover {
-    transform: scale(1.1, 1.1);
-    background: linear-gradient(to right, rgba(85, 85, 85, 0.2), rgba(0, 0, 0, 0.5));
-  } */
   .photoset-btn:focus {
     outline: none;
     transform: scale(1.1, 1.1);
@@ -172,5 +168,14 @@ export default {
     color: white;
     font-weight: bold;
     text-transform: uppercase;
+    transition: 0.2s
+  }
+
+  .send-btn:hover {
+    transform: scale(1.1, 1.1);
+  }
+
+  .close-sidebar-btn {
+    cursor: pointer;
   }
 </style>
