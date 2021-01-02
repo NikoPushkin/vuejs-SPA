@@ -5,7 +5,6 @@
           <img ref='sliderImage' :src="image">
         <!-- </div> -->
       </swiper-slide>
-      <!-- <div class="swiper-pagination" slot="pagination"></div> -->
       <div class="swiper-button-prev" @click='prev' slot="button-prev"></div>
       <div class="swiper-button-next" @click='next' slot="button-next"></div>
     </swiper>

@@ -1,147 +1,67 @@
 <template>
-  <section id='CЪЕМКА'>
-    <div class='photoset-cont' ref='photocont'>
-      <!-- <img src="/images/background2.jpg" alt=""> -->
-      <div class="button-bar" :ref='"button-"+index' :key='service.id' v-for='(service, index) in services'>
-        <button :class='"button-"+index' @click='collapseVisibilityControl("collapse-", index)'
-                >
-          {{ Object.values(service)[0] }}
-        </button>
-        <b-collapse :class='"collapse-"+index' v-model='collapseVisibility["collapse-"+index]'
-                    style='color: black;' class="mt-2"
-                    >
-          <b-card style="max-width: 100%; border-radius: 0;" class='photoset-card pl-0'>
-            <p class='about-photoset'>
-              {{ Object.values(service)[1] }}
-
-            </p>
-            <div class='job-title'
-              >
-              {{ Object.values(service)[2] }}&#8381;
-              <div class='book-service'
-                @click='collapseVisibilityControl("subCollapse-", index)'
-                >
-                <i class="fas fa-feather-alt book-icon"></i>
-              </div>
-            </div>
-            <b-collapse v-model='collapseVisibility["subCollapse-"+index]' class="mt-2">
-              <b-form-input required type="text" placeholder="Как Вас зовут?"></b-form-input>
-              <b-form-input required class='mt-2' type="email" placeholder="Укажите email для связи с Вами"></b-form-input>
-              <button style='height: 50px; width: 100%; margin-top: 10px;'>Отправить</button>
-            </b-collapse>
-          </b-card>
-        </b-collapse>
+  <section id='ОБУЧЕНИЕ' class='course-sect'>
+    <div class="photosets-container">
+      <div ref='titlesPart' class="photoset-titles">
+        <button class='photoset-btn' @click='openSidebar(service.type)' :key='service.id' v-for='service in services'>{{ service.type }}</button>
       </div>
-    </div>
 
-    <div class='mobile-photoset-container'>
-      <swiper ref='mySwiperRef' class="photoset-swiper" :options="swiperOption">
-        <swiper-slide class='mobile-photoset-slide' v-for='(service, index) in services' :key='service.id'>
-          <div class="mobile-service-container">
-            <b-card class='mobile-photoset-card'>
-                <p>
-                  <span>{{ Object.values(service)[0] }}</span>
-                  <span>{{ Object.values(service)[1] }}</span>
-                </p>
+      <div :ref='service.type' class="photoset-description" id='photoset-sidebar' :key='service.id' v-for='service in services'>
+        <div :ref='"content-"+service.type' class="sidebar-content">
+            <span class='close-sidebar-btn' @click='closeSidebar(service.type)'><i class="fas fa-times"></i></span>
+            <span>{{ service.description }}</span>
+            <span class='price-span'>{{ service.price }} &#8381;</span>
+            <b-form-input required type="text" placeholder="Как Вас зовут?"></b-form-input>
+            <b-form-input required class='mt-2' type="email" placeholder="Укажите email для связи с Вами"></b-form-input>
+            <button class='send-btn' style='height: 50px; width: 100%; margin-top: 10px;'>Отправить</button>
+        </div>
+      </div>
 
-
-              <b-card-text class='mobile-job-title'
-                >
-                {{ Object.values(service)[2] }}&#8381;
-                <div class='book-service'
-                  @click='collapseVisibilityControl("subCollapse-", index)'
-                  >
-                  <i class="fas fa-feather-alt book-icon"></i>
-                </div>
-              </b-card-text>
-              <b-collapse v-model='collapseVisibility["subCollapse-"+index]' class="mt-2">
-                <b-form-input required type="text" placeholder="Как Вас зовут?"></b-form-input>
-                <b-form-input required class='mt-2' type="email" placeholder="Укажите email для связи с Вами"></b-form-input>
-                <button style='height: 2rem; width: 100%; margin-top: 0.5rem;'>Отправить</button>
-              </b-collapse>
-            </b-card>
-          </div>
-          <!-- <div> -->
-            <!-- <img ref='sliderImage' :src="image"> -->
-          <!-- </div> -->
-        </swiper-slide>
-        <!-- <div class="swiper-pagination" slot="pagination"></div> -->
-        <div class="swiper-button-prev" @click='prev' slot="button-prev"></div>
-        <div class="swiper-button-next" @click='next' slot="button-next"></div>
-      </swiper>
     </div>
   </section>
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-
-import 'swiper/swiper-bundle.css'
-
 export default {
-  name: 'PhotoSet',
-  components: {
-    Swiper,
-    SwiperSlide
-  },
-  props: {
-    csrfToken: String
-  },
+  name: 'photoset',
+
   data() {
     return {
-      services: {},
-      collapseVisibility: {
-                  'collapse-0': false,
-                  'collapse-1': false,
-                  'collapse-2': false,
-                  'subCollapse-0': false,
-                  'subCollapse-1': false,
-                  'subCollapse-2': false,
-                },
-      emailForm: {
-        message_name: 'ololololo',
-        message_email: 'nikopushkin1@gmail.com',
-        message: 'hehehehehehe'
-      },
-      swiperOption: {
-        slidesPerView: 1,
-        slidesPerGroup: 1,
-        spaceBetween: 30,
-        loop: true,
-      }
+      services: {}
     }
   },
 
-  created() {
-    this.getPhotosetsDescriptions();
-    this.sendEmail(this.csrfToken);
+  props: {
+  },
+
+  async created() {
+    await this.getPhotosetsDescriptions()
+    console.log(this.services);
   },
 
   methods: {
-    collapseVisibilityControl(collapse, id) {
-      // closes collapse and moves button to the section center
-      if (this.collapseVisibility[`${collapse}${id}`]) {
-        this.collapseVisibility[`${collapse}${id}`] = !this.collapseVisibility[`${collapse}${id}`]
-        if (collapse != 'subCollapse-') {
-          this.$refs[`button-${id}`][0].style.marginTop = '45vh'
+    openSidebar(photosetType) {
+      for (let ref in this.$refs) {
+        if (this.$refs[ref][0]) {
+          let refItemStyle = this.$refs[ref][0].style;
+          console.log(refItemStyle);
+          refItemStyle.opacity='0';
+          refItemStyle.pointerEvents = 'none'
         }
-      // открывает коллапс и смещает кнопку к потолку
-      // } else {
-      //   // let stay opened only one collapse at the moment
-      //   if (this.$refs['photocont'].clientWidth < 1200 && collapse != 'subCollapse-') {
-      //     for (let i in this.collapseVisibility) {
-      //       this.collapseVisibility[i] = false
-      //     }
-      //     this.collapseVisibility[`${collapse}${id}`] = !this.collapseVisibility[`${collapse}${id}`]
-      //     // it is possible to open multiple collapses
-        } else {
-          this.collapseVisibility[`${collapse}${id}`] = !this.collapseVisibility[`${collapse}${id}`]
-          this.$refs[`button-${id}`][0].style.marginTop = '25vh'
+        // if (refItemStyle.opacity == '1') {
+        // }
       }
-      // }
+      this.$refs.titlesPart.style.width = '50%';
+      this.$refs[`${photosetType}`][0].style.opacity = '1';
+      this.$refs[`content-${photosetType}`][0].style.opacity = '1';
+      this.$refs[`content-${photosetType}`][0].style.pointerEvents = 'all';
+    },
+    closeSidebar(photosetType) {
+      this.$refs.titlesPart.style.width = '100%';
+      this.$refs[`${photosetType}`][0].style.opacity = '0'
+      this.$refs[`content-${photosetType}`][0].style.opacity = '0';
+      this.$refs[`content-${photosetType}`][0].style.pointerEvents = 'none';
 
     },
-    // get services descriptions
     async getPhotosetsDescriptions() {
       let response = await fetch('http://127.0.0.1:8000/api/get-descriptions');
       if (response.ok) {
@@ -152,195 +72,105 @@ export default {
         return;
       }
     },
-
-    async sendEmail(token) {
-      console.log('TOKEN: ', token);
-      var request = new Request(
-              'http://127.0.0.1:8000/api/send-email',
-              {headers: {'X-CSRFToken': token }}
-            );
-      let data = this.emailForm;
-      let response = await fetch(request, {
-                                  method: 'POST',
-                                  body: JSON.stringify(data),
-                                  credentials: 'include'
-                                });
-      return response;
-    },
-
-    next() {
-      this.$refs.mySwiperRef.$swiper.slideNext()
-    },
-    prev() {
-      this.$refs.mySwiperRef.$swiper.slidePrev()
-    },
   }
 }
 </script>
 
 <style media="screen">
-.mobile-photoset-container {
-  display: none
-}
-
-.job-title {
-  text-align: center;
-  color: #777;
-  /* font-size: 2rem; */
-  /* font-weight: 300; */
-  margin-bottom: 1rem;
-}
-
-.photoset-card {
-  background: none !important
-
-}
-
-.photoset-card p{
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: white
-}
-
-.photoset-cont {
-  width: 90%;
-  margin-left: 5%;
-  height: 100vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  text-align: justify;
-  background-size: cover;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/background2.jpg');
-
-}
-
-.button-bar {
-  width: 33% !important;
-  margin-top: 45vh;
-  transition: .4s;
-}
-
-.button-bar button {
-  background: none;
-  letter-spacing: 1px;
-  position: sticky;
-  clip-path: polygon(40 0 0 0);
-  width: 100%;
-  height: 3rem;
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  outline: none;
-  border: none;
-  transition: .4s
-}
-
-.book-service {
-  display: inline-block;
-  color: blue;
-  padding: 0px 10px;
-  transition: .4s;
-  outline: none
-}
-
-.book-service:hover {
-  transform: scale(1.4, 1.4);
-  cursor: pointer;
-}
-
-input[type="button"]::-moz-focus-inner {
-   border: 0;
-}
-
-button:focus {
-  outline: none !important;
-}
-
-/* .button-1, .collapse-1 {
-  margin-right: 5%;
-  margin-left: 5%
-} */
-
-.button-bar button:hover {
-  transform: scale(1.1, 1.1);
-}
-
-@media screen and (max-width: 1200px){
-  .photoset-cont {
-    display: none
+  .course-sect {
+    background-color: white !important;
+    height: 100vh;
   }
 
-  .mobile-photoset-container {
+  .photosets-container {
+    position: relative;
     display: flex;
-    height: 100vh;
+    flex-direction: row;
+    width: 90%;
+    margin-left: 5%;
+    top: 10vh;
+    height: 80vh;
+    background-size: cover;
+    /* background-image: url('/images/background2.jpg') */
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/background2.jpg');
+  }
+
+  .photoset-titles {
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    heigth: 100%;
     justify-content: center;
     align-items: center;
+    transition: 0.2s
   }
 
-
-  .photoset-swiper {
-    width: 90%;
-    height: 100vh;
+  .photoset-btn {
+    margin-bottom: 5vh;
+    width: 42vh;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    background: none;
+    /* padding: 10px; */
+    border: none;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.2s
   }
 
-  .mobile-photoset-slide {
+  /* .photoset-btn:hover {
+    transform: scale(1.1, 1.1);
+    background: linear-gradient(to right, rgba(85, 85, 85, 0.2), rgba(0, 0, 0, 0.5));
+  } */
+  .photoset-btn:focus {
+    outline: none;
+    transform: scale(1.1, 1.1);
+    background: linear-gradient(to right, rgba(85, 85, 85, 0.2), rgba(0, 0, 0, 0.5));
+  }
+
+  .photoset-description {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    transition: all 0.5s;
+    right: 0 !important;
+    left: auto;
+    opacity: 0;
+    background: linear-gradient(to bottom, rgba(45, 45, 45, 0.2), rgba(0, 0, 0, 0.5));
     display: flex;
-    height: 100vh;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .sidebar-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     text-align: justify;
-  }
-
-  .mobile-photoset-card {
-    max-height: 80vh;
-  }
-
-  .card-body {
-    padding: 1rem !important
-  }
-
-  .mobile-about-photoset {
-    margin: 0
-  }
-
-  .mobile-photoset-card span {
-    display: block;
-  }
-
-  .mobile-photoset-card span:first-of-type {
-    margin-bottom: -10px;
-    letter-spacing: 3px;
-    font-size: 0.9em;
+    width: 80%;
     font-weight: bold;
-    padding-bottom: 1rem;
-    text-align: center;
+    opacity: 0;
   }
 
-  .mobile-photoset-card span:last-of-type {
-    margin-bottom: -10px;
-    letter-spacing: 2px;
-    font-size: 0.8em;
+  .sidebar-content span {
+    margin-bottom: 20px;
+    font-size: 20px;
   }
 
-  .mobile-job-title {
-    margin-top: 1rem !important;
-    margin-bottom: 0;
-    text-align: center;
+  .price-span {
+    color: #777;
+    font-size: 25px
   }
 
-  .mobile-photoset-container button {
-    background-color: white;
-    letter-spacing: 1px;
-    position: sticky;
-    clip-path: polygon(40 0 0 0);
-    width: 100%;
-    height: 3rem;
-    color: black;
-    font-size: 1.3rem;
-    outline: none;
+  .send-btn {
+    background: none;
     border: none;
-    transition: .4s
+    outline: none;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
   }
-}
 </style>
