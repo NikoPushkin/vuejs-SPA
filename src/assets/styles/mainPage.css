@@ -8,7 +8,7 @@ body {
 }
 
 .iScrollIndicator {
-  display: none !important; 
+  display: none !important;
 }
 /* NAVBAR  NAVBAR NAVBAR NAVBAR NAVBAR */
 
@@ -64,7 +64,9 @@ body {
 .navbar-button {
   display: inline-block;
   margin: 0 10px;
-  transition: 0.4s
+  transition: 0.4s;
+  will-change: transform;
+
 }
 .navbar-button a {
   width: 190px;
@@ -207,3 +209,52 @@ body {
   color: white;
   background-color: black
 }
+
+/*
+ *
+ * GENERAL BUTTONS STYLES
+ *
+*/
+.btn-class {
+  background: none;
+  border: none;
+  outline: none;
+  transition: 0.2s
+}
+
+.btn-class:focus {
+  outline: none;
+  transform: scale(1.1, 1.1);
+}
+
+.hover-transform-btn:hover {
+  transform: scale(1.1, 1.1);
+}
+
+.close-btn-box {
+  position: absolute;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  right: 0;
+  z-index: 2;
+  background-color: white;
+  top: 0;
+  height: 27px;
+  width: 27px
+}
+
+.close-btn {
+  color: black;
+  cursor: pointer;
+}
+/*
+ * BUTTONS STYLES END
+*/
+
+
+/*
+ *
+ * GENERAL FONT STYLES
+ *
+*/

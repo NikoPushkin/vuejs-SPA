@@ -284,6 +284,9 @@ export default {
     font-size: 1.6em;
     letter-spacing: 8px
   }
+  .sidebar-btn button:focus {
+    outline: none
+  }
 
   .main-about-text span {
     display: block;
