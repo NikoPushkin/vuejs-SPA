@@ -40,20 +40,9 @@
         <EducationComponent></EducationComponent>
       </div>
 
-
-      <div class="section">
-          <div id="mySidenav" class="sidenav">
-            <table class="sidenav-table">
-              <tr><a href="javascript:void(0)" class="closebtn" @click="closeNav()">&times;</a></tr>
-              <tr><a href="https://www.instagram.com/vegeraveronika"><i class="fab fa-instagram"></i></a></tr>
-              <tr><a href="https://vk.com/vegeraveronika"><i class="fab fa-vk"></i></a></tr>
-              <tr><a href="https://t.me/lumosphoto"><i class="fab fa-telegram"></i></a></tr>
-            </table>
-          </div>
-      </div>
     </full-page>
     <div class='mainPageFooter'>
-      <h4>Veronika Vegera Photography</h4>
+      <!-- <h4>Veronika Vegera Photography</h4> -->
       <div class="">
         <a href="https://www.instagram.com/vegeraveronika"><i class="fab fa-instagram"></i></a>
         <a href="https://vk.com/vegeraveronika"><i class="fab fa-vk"></i></a>
@@ -87,7 +76,7 @@ export default {
         menu: '#menu',
         navigation: true,
         anchors: ['/about', '/galary', '/photoset', '/education'],
-        sectionsColor: ['#FFFFFF  ', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#1bcee6', '#ee1a59', '#2c3e4f', '#ba5be9', '#b4b8ab']
+        sectionsColor: ['#FFFFFF  ', '#FFFFFF', '#FFFFFF', '#FFFFFF']
       },
       navbarElems: [
         { 'ГЛАВНАЯ': '/about' },

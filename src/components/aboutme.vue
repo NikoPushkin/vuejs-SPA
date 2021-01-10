@@ -1,4 +1,4 @@
-<template>
+  <template>
   <!-- <div> -->
     <!-- <b-modal id="modal-scrollable" centered button-size='400' hide-header ok-only ok-variant='light' ok-title='ЗАКРЫТЬ'> -->
     <div class="aboutme-container">
@@ -27,7 +27,7 @@
       </div>
       <div class="mobile-card-container">
         <div class="mobile-card-wrapper">
-          <img src="/images/avatar.jpg" alt="profile-img" class='mobile-profile-img'>
+          <!-- <img src="/images/avatar.jpg" alt="profile-img" class='mobile-profile-img'> -->
           <div class="sidebar-btn">
             <p class="main-about-text">
               <span>Veronika Vegera</span>
@@ -83,8 +83,8 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  top: 10vh;
-  height: 80%;
+  top: 5vh;
+  height: 90%;
   width: 100%
 }
 
@@ -196,6 +196,7 @@ export default {
     margin-top: 28vh;
   }
 
+
   .card-left h1 {
     font-size: 1.5rem;
     margin: 0.5rem 0
@@ -209,16 +210,27 @@ export default {
 
 
 @media screen and (max-width: 800px){
+  .aboutme-container {
+    width: 90%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+
   .card-container {
     display: none;
   }
 
   .mobile-card-container {
-    position: absolute;
-    display: block;
-    height: 80vh;
+    position: relative;
+    display: grid;
+    height: 100%;
     width: 100%;
-    margin-top: 10vh
+    background-size: cover;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('/images/avatar.jpg');
   }
 
   .mobile-card-wrapper {
@@ -226,11 +238,13 @@ export default {
     align-items: center;
     align-content: center;
     flex-direction: column;
+    /* height: 90vh; */
+    width: 100%;
   }
 
   .card {
     width: 100%;
-    height: 100%;
+    height: 90vh;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -241,14 +255,14 @@ export default {
   .mobile-profile-img {
     clip-path: inset(0 0 0 0);
     width: 90%;
-    height: 80vh;
+    height: 90vh;
     object-fit: cover;
     z-index: 1;
   }
 
   #mainpage-sidebar {
-    height: 80vh !important;
-    top: 10vh !important;
+    height: 90vh !important;
+    top: 5vh !important;
     width: 100% !important;
     text-align:justify !important;
     word-break:keep-all !important;
@@ -262,8 +276,8 @@ export default {
     position: absolute;
     display: flex;
     flex-direction: column;
-    width: 90%;
-    height: 80vh;
+    width: 100%;
+    height: 100%;
     align-items: center;
     justify-content: center;
     z-index: 2;
@@ -271,7 +285,7 @@ export default {
     background: rgba(0, 0, 0, 0.5);
     color: #f1f1f1;
     text-align: center;
-    padding-top: 7em
+    padding-top: 10vh
   }
 
   .sidebar-btn button {

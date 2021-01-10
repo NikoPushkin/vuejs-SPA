@@ -83,8 +83,8 @@ export default {
   flex-direction: row;
   width: 90%;
   margin-left: 5%;
-  top: 10vh;
-  height: 80vh;
+  top: 5vh;
+  height: 90vh;
 }
 
 .education-left-part {

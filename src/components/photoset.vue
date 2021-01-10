@@ -1,5 +1,4 @@
 <template>
-  <section id='ОБУЧЕНИЕ' class='course-sect'>
     <div class="photosets-container">
       <div ref='titlesPart' class="photoset-titles">
         <button class='photoset-btn btn-class' @click='openSidebar(service.type)' :key='service.id' v-for='service in services'>{{ service.type }}</button>
@@ -24,18 +23,22 @@
           <span class='close-btn hover-transform-btn' @click='closePreset'><i class="fas fa-times"></i></span>
         </div>
         <div class="right-description-box">
-          <p class='preset-name'>Коллекция Авторских пресетов - «FLORAL SHOCK»</p>
+          <p class='preset-title'>Коллекция Авторских пресетов</p>
+          <p class='preset-name'>«FLORAL SHOCK»</p>
           <div class="preset-description">
             <p><b>В коллекцию включено: </b>8 пресетов для Adobe Lightroom + Lightroom Mobile</p>
             <p><b>Пресеты в 2х форматах: </b>.xmp, .dng;</p>
             <p>Дополнительно вы получите подробную инструкцию по установке как для компьютерной версии так и для мобильной.</p>
             <p>ВНИМАНИЕ: При использовании пресетов возможно потребуется редактирование экспозиции, баланса белого или контрастности отдельно для каждого снимка.</p>
-            <p class='price-span text-center'>Стоимость: 1500&#8381;</p>
+            <p class='preset-price'>Стоимость: 1500&#8381;</p>
           </div>
         </div>
         <div class="demonstration-image-box">
           <div class="">
-            <img src="/images/preset1.jpg" alt="">
+            <img v-b-modal.modal-1 src="/images/preset1.jpg" alt="">
+            <b-modal hide-header hide-footer centered size='l' id="modal-1">
+              <img style='width: 100%' src="/images/preset1.jpg" alt="">
+            </b-modal>
           </div>
           <div class="">
             <img src="/images/presetcover.jpg" alt="">
@@ -50,7 +53,6 @@
       </div>
     </div>
 
-  </section>
 </template>
 
 <script>
@@ -144,17 +146,19 @@ export default {
 <style media="screen">
 .course-sect {
   background-color: white !important;
-  height: 100vh;
+  height: 90%;
+  margin-top: 5vh;
 }
 
 .photosets-container {
+  overflow: hidden;
   position: relative;
   display: flex;
   flex-direction: row;
   width: 90%;
   margin-left: 5%;
-  top: 10vh;
-  height: 80vh;
+  top: 5vh;
+  height: 90%;
   background-size: cover;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/background2.jpg');
 }
@@ -200,7 +204,7 @@ export default {
 .preset-bar {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 90vh;
   transition: all 0.5s;
   opacity: 0;
   background-color: white;
@@ -216,7 +220,7 @@ export default {
 }
 
 .right-description-box {
-  padding: 0 40px;
+  padding: 0 3vw;
   color: black;
   grid-area: right-description-box;
   display: grid;
@@ -244,17 +248,55 @@ export default {
   width: 96%;
 }
 
+.preset-title {
+  letter-spacing: 4px;
+  font-weight: bold;
+  font-size: 2vh;
+  text-align: center;
+  margin-bottom: 0
+}
 .preset-name {
   letter-spacing: 4px;
   font-weight: bold;
-  font-size: 22px;
+  font-size: 2vh;
   text-align: center;
 }
 
 .preset-description {
   letter-spacing: 2px;
-  font-size: 16px;
+  font-size: 1.6vh;
   text-align: justify;
+}
+
+.preset-price {
+  color: #777;
+  font-size: 2vh;
+  text-align: center;
+}
+
+@media screen and (max-width: 1140px) {
+  .preset-bar {
+    background: linear-gradient(to bottom, rgba(250, 250, 250, 1), rgba(230, 230, 230, 1));
+    grid-template-columns: 100%;
+    grid-template-rows: 70% 15%;
+    grid-template-areas:
+      "right-description-box"
+      "demonstration-image-box";
+    align-content: flex-start;
+  }
+
+  .right-description-box {
+    align-content: center;
+  }
+
+  .demonstration-image-box {
+    grid-area: demonstration-image-box;
+    display: grid;
+    grid-template-columns: 20vw 20vw 20vw 20vw;
+    grid-template-rows: auto;
+    justify-content: space-around;
+    padding: 0 10px;
+  }
 }
 
 @media screen and (max-width: 950px) {
