@@ -1,8 +1,22 @@
 <template>
-  <section id='ОБУЧЕНИЕ' class='course-sect'>
     <div class="education-container">
-
       <div ref='leftPart' class="education-left-part">
+        <p>индивидуальное обучение</p>
+        <button  class='btn-class' @click='openDescription(day.number)' :key='day.id' v-for='day in educationDays'>{{ day.number }}</button>
+      </div>
+
+      <div :ref='day.number' class="education-right-part" :key='day.id' v-for='day in educationDays'>
+        <div :ref='"description-"+day.number' class="day-description">
+          <div class="close-btn-box">
+            <span class='close-btn hover-transform-btn' @click='closeDescription(day.number)'><i class="fas fa-times"></i></span>
+          </div>
+
+          <div ref='daysContent' class="days-content">{{ day.description }}</div>
+        </div>
+      </div>
+
+
+      <!-- <div ref='leftPart' class="education-left-part">
         <p>индивидуальное обучение</p>
         <div ref='daysContainer' class="days-container">
           <button @click='openDescription(index, day.description)' :key='day.id' v-for='(day, index) in educationDays'>{{ day.number }}</button>
@@ -12,10 +26,9 @@
       <div ref='rightPart' class="education-right-part">
         <span class='close-sidebar-btn' @click='closeDescription'><i class="fas fa-times"></i></span>
         <div ref='daysContent' class="days-content"></div>
-      </div>
+      </div> -->
 
     </div>
-  </section>
 </template>
 
 <script>
@@ -41,7 +54,7 @@ export default {
   },
 
   methods: {
-    openDescription(refIndex, description) {
+    closeOpenedDescription() {
       for (let ref in this.$refs) {
         if (this.$refs[ref][0]) {
           let refItemStyle = this.$refs[ref][0].style;
@@ -49,29 +62,72 @@ export default {
           refItemStyle.pointerEvents = 'none'
         }
       }
+    },
 
+    openDescription(descriptionRef) {
+      console.log(this.$refs);
+      this.closeOpenedDescription();
+      // move photoset-titles to the left side when description window is opened
+      this.$refs.leftPart.style.width = '50%';
+
+      // opens fullscreen description if screen size is small
       if (window.screen.width < 950) {
-        this.$refs.leftPart.style.display = 'none';
-        this.$refs.rightPart.style.width = '100%';
+        this.$refs.leftPart.style.display = 'none'
       }
 
-      this.$refs.daysContainer.style.width = '100%'
-      this.$refs.leftPart.style.width = '50%';
-      this.$refs.rightPart.style.opacity = '1';
-      this.$refs.rightPart.style.pointerEvents = 'all';
-      this.$refs.daysContent.innerHTML = description;
+      // show description window
+      this.$refs[`${descriptionRef}`][0].style.opacity = '1';
+      this.$refs[`description-${descriptionRef}`][0].style.opacity = '1';
+      this.$refs[`description-${descriptionRef}`][0].style.pointerEvents = 'all';
     },
-    closeDescription() {
+
+    closeDescription(descriptionRef) {
+      // move photoset-titles to the center side when description window is opened
+      this.$refs.leftPart.style.width = '100%';
+
       if (window.screen.width < 950) {
         this.$refs.leftPart.style.display = 'flex'
-      } else {
-        this.$refs.daysContainer.style.width = '50%'
       }
-      this.$refs.leftPart.style.width = '100%'
-      this.$refs.rightPart.style.opacity = '0'
-      this.$refs.rightPart.style.pointerEvents = 'none'
-
+      // hide description window
+      this.$refs[`${descriptionRef}`][0].style.opacity = '0'
+      this.$refs[`description-${descriptionRef}`][0].style.opacity = '0';
+      this.$refs[`description-${descriptionRef}`][0].style.pointerEvents = 'none';
     }
+
+
+    // openDescription(refIndex, description) {
+    //   for (let ref in this.$refs) {
+    //     if (this.$refs[ref][0]) {
+    //       let refItemStyle = this.$refs[ref][0].style;
+    //       refItemStyle.opacity='0';
+    //       refItemStyle.pointerEvents = 'none'
+    //     }
+    //   }
+    //
+    //   if (window.screen.width < 950) {
+    //     this.$refs.leftPart.style.display = 'none';
+    //     // this.$refs.rightPart.style.width = '100%';
+    //   }
+    //
+    //   this.$refs.daysContainer.style.width = '100%'
+    //   this.$refs.leftPart.style.width = '50%';
+    //   this.$refs.rightPart.style.width = '50%';
+    //
+    //   this.$refs.rightPart.style.opacity = '1';
+    //   this.$refs.rightPart.style.pointerEvents = 'all';
+    //   this.$refs.daysContent.innerHTML = description;
+    // },
+    // closeDescription() {
+    //   if (window.screen.width < 950) {
+    //     this.$refs.leftPart.style.display = 'flex'
+    //   } else {
+    //     this.$refs.daysContainer.style.width = '50%'
+    //   }
+    //   this.$refs.leftPart.style.width = '100%'
+    //   this.$refs.rightPart.style.opacity = '0'
+    //   this.$refs.rightPart.style.pointerEvents = 'none'
+    //
+    // }
   }
 }
 </script>
@@ -165,7 +221,7 @@ export default {
   align-items: center;
 }
 
-.days-content {
+.days-description {
   text-align: justify;
   width: 70%;
   font-size: 18px;
@@ -225,7 +281,7 @@ export default {
     width: 90%
   }
 
-  .days-content {
+  .days-description {
     width: 80%;
     font-size: 12px
   }

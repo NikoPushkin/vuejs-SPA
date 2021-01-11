@@ -100,7 +100,6 @@ export default {
     },
 
     openSidebar(photosetType) {
-      console.log(this.$refs);
       this.closeOpenedDescription();
       // move photoset-titles to the left side when description window is opened
       this.$refs.titlesPart.style.width = '50%';
