@@ -134,11 +134,11 @@ export default {
   width: 18rem;
   height: 18rem;
   margin-left: -9rem;
-  margin-top: 25vh;
+  margin-top: 30vh;
   object-fit: cover;
   border-radius: 50%;
   z-index: 1;
-  border: 0.2rem solid white
+  border: 0.3rem solid white
 
 }
 
