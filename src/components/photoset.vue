@@ -36,8 +36,14 @@
         <div class="demonstration-image-box">
           <div class="">
             <img v-b-modal.modal-1 src="/images/preset1.jpg" alt="">
-            <b-modal hide-header hide-footer centered size='l' id="modal-1">
-              <img style='width: 100%' src="/images/preset1.jpg" alt="">
+            <b-modal class='preset-modal' hide-footer centered size='l' id="modal-1">
+              <swiper ref='modalSwiperRef' class="swiper" :options="swiperOption">
+                <swiper-slide v-for='presetImage in modalSwiper' :key='presetImage.id'>
+                    <img class='modal-swiper-image' :src="presetImage">
+                </swiper-slide>
+                <div class="swiper-button-prev" @click='prevModalImage' slot="button-prev"></div>
+                <div class="swiper-button-next" @click='nextModalImage' slot="button-next"></div>
+              </swiper>
             </b-modal>
           </div>
           <div class="">
@@ -56,12 +62,28 @@
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import 'swiper/swiper-bundle.css'
 
 export default {
   name: 'photoset',
+  components: {
+    Swiper,
+    SwiperSlide
+  },
   data() {
     return {
       services: {},
+      modalSwiper:  [
+          "/images/preset1.jpg",
+          "/images/preset3.jpg",
+          "/images/preset4.jpg",
+          ],
+      swiperOption: {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+      }
     }
   },
 
@@ -73,14 +95,21 @@ export default {
   },
 
   methods: {
+    nextModalImage() {
+      this.$refs.modalSwiperRef.$swiper.slideNext()
+    },
+    prevModalImage() {
+      this.$refs.modalSwiperRef.$swiper.slidePrev()
+    },
+
     // close opened window if another one is opening
     closeOpenedDescription() {
       for (let ref in this.$refs) {
-        if (this.$refs[ref][0]) {
+        try {
           let refItemStyle = this.$refs[ref][0].style;
           refItemStyle.opacity='0';
           refItemStyle.pointerEvents = 'none'
-        }
+        } catch { continue }
       }
     },
 
@@ -143,6 +172,26 @@ export default {
 </script>
 
 <style media="screen">
+#modal-1 div {
+  background: none !important;
+  border: none !important
+}
+#modal-1 header {
+  border: none !important;
+  padding-top: 1rem ;
+  padding-right: 1rem ;
+  padding-bottom: 0 ;
+  padding-left: 1rem
+}
+
+#modal-1 button {
+  color: white;
+  outline: none
+}
+.modal-swiper-image {
+  width: 100%
+}
+
 .course-sect {
   background-color: white !important;
   height: 90%;
