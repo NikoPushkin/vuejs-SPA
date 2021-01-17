@@ -14,20 +14,6 @@
           <div ref='daysContent' class="days-content">{{ day.description }}</div>
         </div>
       </div>
-
-
-      <!-- <div ref='leftPart' class="education-left-part">
-        <p>индивидуальное обучение</p>
-        <div ref='daysContainer' class="days-container">
-          <button @click='openDescription(index, day.description)' :key='day.id' v-for='(day, index) in educationDays'>{{ day.number }}</button>
-        </div>
-      </div>
-
-      <div ref='rightPart' class="education-right-part">
-        <span class='close-sidebar-btn' @click='closeDescription'><i class="fas fa-times"></i></span>
-        <div ref='daysContent' class="days-content"></div>
-      </div> -->
-
     </div>
 </template>
 
