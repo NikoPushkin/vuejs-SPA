@@ -135,4 +135,11 @@ export default {
     width: 100%
   }
 }
+@media screen and (max-width: 450px) {
+  .education-left-part p {
+    font-size: 2.3vh;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+}
 </style>
