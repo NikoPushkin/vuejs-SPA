@@ -363,6 +363,7 @@ export default {
   text-align: justify;
   width: 80%;
   font-weight: bold;
+  color: white;
   opacity: 0;
 }
 
