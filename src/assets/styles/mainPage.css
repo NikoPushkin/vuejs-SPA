@@ -1,5 +1,6 @@
 #app {
-  font-family: sans-serif;
+  /* font-family: sans-serif; */
+  font-family: 'Courier New', monospace;
 }
 
 body {
@@ -30,7 +31,8 @@ body {
 }
 
 .mainPageFooter h4{
-  font-family: "Lato", sans-serif;
+  font-family: 'Courier New', monospace;
+  /* font-family: "Lato", sans-serif; */
   letter-spacing: 2px;
   font-size: 27px;
 }
@@ -71,8 +73,10 @@ body {
 .navbar-button a {
   width: 190px;
   height: 90px;
-  font-family: "Lato", sans-serif;
-  letter-spacing: 2px;
+  font-weight: 10;
+  /* font-family: "Lato", sans-serif; */
+  font-family: 'Courier New', monospace;
+  letter-spacing: 4px;
   font-size: 27px;
   color: black !important;
   cursor: pointer;
