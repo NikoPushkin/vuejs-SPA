@@ -1,8 +1,12 @@
 <template>
     <div class="education-container">
       <div ref='leftPart' class="education-left-part">
-        <p>индивидуальное обучение</p>
-        <button  class='btn-class' @click='openDescription(day.number)' :key='day.id' v-for='day in educationDays'>{{ day.number }}</button>
+        <div class="left-part-content">
+          <p>индивидуальное обучение</p>
+          <div class="days-btns-container">
+            <button  class='btn-class' @click='openDescription(day.number)' :key='day.id' v-for='day in educationDays'>{{ day.number }}</button>
+          </div>
+        </div>
       </div>
 
       <div :ref='day.number' class="education-right-part" :key='day.id' v-for='day in educationDays'>
@@ -11,7 +15,7 @@
             <span class='close-btn hover-transform-btn' @click='closeDescription(day.number)'><i class="fas fa-times"></i></span>
           </div>
 
-          <span ref='daysContent' class="days-content">{{ day.description }}</span>
+          <span ref='daysContent' class="days-content"> {{ day.description }}</span>
         </div>
       </div>
     </div>
@@ -52,11 +56,9 @@ export default {
     },
 
     openDescription(descriptionRef) {
-      console.log(this.$refs);
       this.closeOpenedDescription();
       // move photoset-titles to the left side when description window is opened
       this.$refs.leftPart.style.width = '50%';
-
 
       // opens fullscreen description if screen size is small
       if (window.screen.width < 950) {
@@ -89,6 +91,8 @@ export default {
   position: relative;
   display: flex;
   flex-direction: row;
+  background-size: cover;
+  background-image: url('/images/edbg2.jpg');
   width: 90%;
   margin-left: 5%;
   top: 5vh;
@@ -96,20 +100,49 @@ export default {
 }
 
 .education-left-part {
+  font-family: 'Courier New', monospace;
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
-  text-align: justify;
-  color: black;
+  text-align: center;
   transition: 0.2s
 }
 
+
 .education-left-part p {
+  /* font-weight: bold; */
   font-size: 3vh;
-  letter-spacing: 2px;
+  letter-spacing: 5px;
   text-transform: uppercase;
+}
+
+.left-part-content {
+  display: block;
+}
+
+.days-btns-container {
+  /* position: relative; */
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-content: center;
+  grid-gap: 1.6vh;
+  justify-items: center;
+  align-items: center;
+
+}
+
+.days-btns-container button {
+  border: 1px solid;
+  color: black;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 2.3vh;
+  letter-spacing: 2px;
+  /* font-weight: bold; */
 }
 
 .education-right-part {
@@ -134,10 +167,14 @@ export default {
   .education-right-part {
     width: 100%
   }
+  .days-btns-container button {
+    font-size: 1.8vh;
+    font-weight: bold;
+  }
 }
 @media screen and (max-width: 450px) {
   .education-left-part p {
-    font-size: 2.3vh;
+    font-size: 2.2vh;
     letter-spacing: 2px;
     text-transform: uppercase;
   }
