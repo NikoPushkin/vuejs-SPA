@@ -1,6 +1,4 @@
   <template>
-  <!-- <div> -->
-    <!-- <b-modal id="modal-scrollable" centered button-size='400' hide-header ok-only ok-variant='light' ok-title='ЗАКРЫТЬ'> -->
     <div class="aboutme-container">
       <div class="card-container">
           <div class="card-wrapper">
@@ -33,16 +31,16 @@
               <span>Veronika Vegera</span>
               <span>Photography</span>
             </p>
-            <button v-b-toggle.mainpage-sidebar>ОБО МНЕ</button>
+            <button v-b-modal.about-me-modal>ОБО МНЕ</button>
           </div>
-          <b-sidebar id="mainpage-sidebar" title="Приветствую тебя на моем сайте!" cshadow>
-            <div class="px-3 py-2">
-              <p>
+          <b-modal hide-footer centered size='l' id="about-me-modal" cshadow>
+            <div>
+              <p style='color:white'>
                 Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
                 in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
               </p>
             </div>
-          </b-sidebar>
+          </b-modal>
         </div>
       </div>
     </div>
@@ -61,6 +59,27 @@ export default {
 </script>
 
 <style media="screen">
+
+#about-me-modal div {
+  border: none !important;
+}
+
+#about-me-modal .modal-content {
+  background: #000000eb !important;
+}
+
+#about-me-modal header {
+  border: none !important;
+  padding-top: 1rem ;
+  padding-right: 1rem ;
+  padding-bottom: 0 ;
+  padding-left: 1rem
+}
+
+#about-me-modal button {
+  color: white;
+  outline: none
+}
 
 /*
 
