@@ -33,9 +33,9 @@
             <p class='preset-price'>Стоимость: 1500&#8381;</p>
           </div>
         </div>
-        <div class="demonstration-image-box">
+        <div class="demonstration-image-box" ref='presetExamplesBox' v-b-modal.modal-1>
           <div class="">
-            <img v-b-modal.modal-1 src="/images/preset1.jpg" alt="">
+            <img src="/images/preset1.jpg" alt="">
             <b-modal class='preset-modal' hide-footer centered size='l' id="modal-1">
               <swiper ref='modalSwiperRef' class="swiper" :options="swiperOption">
                 <swiper-slide v-for='presetImage in modalSwiper' :key='presetImage.id'>
@@ -119,6 +119,9 @@ export default {
 
       this.$refs['preset'].style.opacity = '1';
       this.$refs['preset'].style.pointerEvents = 'all';
+      if (window.screen.width < 1140) {
+        this.$refs['presetExamplesBox'].style.pointerEvents = 'all';
+      }
     },
 
     closePreset() {
@@ -126,6 +129,7 @@ export default {
       this.$refs.titlesPart.style.display = 'flex'
       this.$refs['preset'].style.opacity = '0';
       this.$refs['preset'].style.pointerEvents = 'none';
+      this.$refs['presetExamplesBox'].style.pointerEvents = 'none'
     },
 
     openSidebar(photosetType) {
@@ -264,7 +268,6 @@ export default {
     "demonstration-image-box right-description-box";
   pointer-events: none;
   background: linear-gradient(to left, rgba(250, 250, 250, 1), rgba(230, 230, 230, 1));
-
 }
 
 .right-description-box {
@@ -282,6 +285,9 @@ export default {
   grid-template-rows: 20vw 20vw;
   align-content: center;
   justify-content: center;
+  pointer-events: none;
+  border: none;
+  outline: none
 }
 
 .demonstration-image-box div {
