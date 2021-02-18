@@ -33,7 +33,7 @@
             </p>
             <button v-b-modal.about-me-modal>ОБО МНЕ</button>
           </div>
-          <b-modal hide-footer centered size='l' id="about-me-modal" cshadow>
+          <b-modal hide-footer centered size='l' class='about-me-modal' id="about-me-modal" cshadow>
             <div>
               <p style='color:white'>
                 Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis

@@ -1,5 +1,6 @@
 <template>
     <div class="photosets-container">
+      <emailFormComponent :price='emailFormPrice' :type='emailFormType'></emailFormComponent>
       <div ref='titlesPart' class="photoset-titles">
         <button class='photoset-btn btn-class' @click='openSidebar(service.type)' :key='service.id' v-for='service in services'>{{ service.type }}</button>
         <button class='photoset-btn btn-class' @click='openPreset'>Floral shock</button>
@@ -13,9 +14,13 @@
 
             <span>{{ service.description }}</span>
             <span class='price-span'>{{ service.price }} &#8381;</span>
-            <b-form-input required type="text" placeholder="Как Вас зовут?"></b-form-input>
-            <b-form-input required class='mt-2' type="email" placeholder="Укажите email для связи с Вами"></b-form-input>
-            <button class='send-btn btn-class hover-transform-btn' style='height: 50px; width: 100%; margin-top: 10px;'>Отправить</button>
+            <button @click='setEmailFormProps(service.price,service.type)'
+                    class='send-btn btn-class hover-transform-btn'
+                    v-b-modal.email-form-modal
+                    style='height: 50px; width: 100%; margin-top: 10px;'
+                    >
+                    Отправить заявку
+            </button>
         </div>
       </div>
       <div ref='preset' class="preset-bar">
@@ -31,6 +36,13 @@
             <p>Дополнительно вы получите подробную инструкцию по установке как для компьютерной версии так и для мобильной.</p>
             <p>ВНИМАНИЕ: При использовании пресетов возможно потребуется редактирование экспозиции, баланса белого или контрастности отдельно для каждого снимка.</p>
             <p class='preset-price'>Стоимость: 1500&#8381;</p>
+            <button @click='setEmailFormProps(1500, "Floral shock")'
+                    class='send-btn btn-class hover-transform-btn'
+                    v-b-modal.email-form-modal
+                    style='height: 50px; width: 100%; margin-top: 10px;'
+                    >
+                    Отправить заявку
+            </button>
           </div>
         </div>
         <div class="demonstration-image-box" ref='presetExamplesBox' v-b-modal.modal-1>
@@ -64,12 +76,15 @@
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/swiper-bundle.css'
+import emailFormComponent from '../components/emailform.vue'
+
 
 export default {
   name: 'photoset',
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    emailFormComponent
   },
   data() {
     return {
@@ -83,7 +98,9 @@ export default {
         slidesPerView: 1,
         spaceBetween: 30,
         loop: true,
-      }
+      },
+      emailFormPrice: '',
+      emailFormType: '',
     }
   },
 
@@ -95,6 +112,11 @@ export default {
   },
 
   methods: {
+    setEmailFormProps(price, type) {
+      this.emailFormPrice = price;
+      this.emailFormType = type;
+    },
+
     nextModalImage() {
       this.$refs.modalSwiperRef.$swiper.slideNext()
     },
