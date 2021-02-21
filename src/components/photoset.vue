@@ -368,6 +368,12 @@ export default {
   text-align: center;
 }
 
+.preset-description {
+  letter-spacing: 2px;
+  font-size: 1.6vh;
+  text-align: justify;
+}
+
 .demonstration-image-box {
   grid-area: demonstration-image-box;
   display: grid;
