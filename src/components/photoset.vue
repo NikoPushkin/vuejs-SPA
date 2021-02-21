@@ -1,69 +1,120 @@
 <template>
     <div class="photosets-container">
-      <emailFormComponent :price='emailFormPrice' :type='emailFormType'></emailFormComponent>
+      <emailFormComponent :price='emailFormPrice' :type='emailFormType'
+      >
+      </emailFormComponent>
+
       <div ref='titlesPart' class="photoset-titles">
-        <button class='photoset-btn btn-class' @click='openSidebar(service.type)' :key='service.id' v-for='service in services'>{{ service.type }}</button>
-        <button class='photoset-btn btn-class' @click='openPreset'>Floral shock</button>
+        <button class='photoset-btn btn-class'
+                @click='openSidebar(service.type)'
+                :key='service.id'
+                v-for='service in services'
+        >
+          {{ service.type }}
+        </button>
+
+        <button class='photoset-btn btn-class'
+                @click='openPreset'
+        >
+          Floral shock
+        </button>
       </div>
 
-      <div :ref='service.type' class="photoset-description" id='photoset-sidebar' :key='service.id' v-for='service in services'>
+      <div :ref='service.type'
+           class="photoset-description"
+           :key='service.id'
+           v-for='service in services'
+      >
         <div :ref='"content-"+service.type' class="sidebar-content">
             <div class="close-btn-box">
-              <span class='close-btn hover-transform-btn' @click='closeSidebar(service.type)'><i class="fas fa-times"></i></span>
+              <span class='close-btn hover-transform-btn'
+                    @click='closeSidebar(service.type)'
+              >
+                <i class="fas fa-times"></i>
+              </span>
             </div>
 
+            <div class='mb-4 horizontal-line-white'></div>
             <span>{{ service.description }}</span>
-            <span class='price-span'>{{ service.price }} &#8381;</span>
-            <button @click='setEmailFormProps(service.price,service.type)'
-                    class='send-btn btn-class hover-transform-btn'
+            <div class='mt-4 horizontal-line-white'></div>
+            <span class='price-class'>Стоимость: {{ service.price }} &#8381;</span>
+            <button class='send-btn btn-class hover-transform-btn'
+                    @click='setEmailFormProps(service.price,service.type)'
                     v-b-modal.email-form-modal
-                    style='height: 50px; width: 100%; margin-top: 10px;'
-                    >
-                    Отправить заявку
+              >
+              Отправить заявку
             </button>
         </div>
       </div>
       <div ref='preset' class="preset-bar">
         <div class="close-btn-box">
-          <span class='close-btn hover-transform-btn' @click='closePreset'><i class="fas fa-times"></i></span>
+          <span class='close-btn hover-transform-btn'
+                @click='closePreset'
+          >
+            <i class="fas fa-times"></i>
+          </span>
         </div>
+
         <div class="right-description-box">
           <p class='preset-title'>Коллекция Авторских пресетов</p>
           <p class='preset-name'>«FLORAL SHOCK»</p>
+
           <div class="preset-description">
             <p><b>В коллекцию включено: </b>8 пресетов для Adobe Lightroom + Lightroom Mobile</p>
             <p><b>Пресеты в 2х форматах: </b>.xmp, .dng;</p>
             <p>Дополнительно вы получите подробную инструкцию по установке как для компьютерной версии так и для мобильной.</p>
             <p>ВНИМАНИЕ: При использовании пресетов возможно потребуется редактирование экспозиции, баланса белого или контрастности отдельно для каждого снимка.</p>
-            <p class='preset-price'>Стоимость: 1500&#8381;</p>
-            <button @click='setEmailFormProps(1500, "Floral shock")'
-                    class='send-btn btn-class hover-transform-btn'
+            <p class='price-class'>Стоимость: 1500&#8381;</p>
+            <button class='mb-4 send-btn btn-class hover-transform-btn'
+                    style='color: black'
+                    @click='setEmailFormProps(1500, "Floral shock")'
                     v-b-modal.email-form-modal
-                    style='height: 50px; width: 100%; margin-top: 10px;'
-                    >
-                    Отправить заявку
+            >
+              Отправить заявку
             </button>
           </div>
+
         </div>
-        <div class="demonstration-image-box" ref='presetExamplesBox' v-b-modal.modal-1>
+
+        <div ref='presetExamplesBox'
+             class="demonstration-image-box"
+             v-b-modal.modal-preset
+        >
+
           <div class="">
             <img src="/images/preset1.jpg" alt="">
-            <b-modal class='preset-modal' hide-footer centered size='l' id="modal-1">
+            <b-modal class='preset-modal' hide-footer centered size='l' id="modal-preset">
               <swiper ref='modalSwiperRef' class="swiper" :options="swiperOption">
-                <swiper-slide v-for='presetImage in modalSwiper' :key='presetImage.id'>
+
+                <swiper-slide v-for='presetImage in modalSwiper'
+                              :key='presetImage.id'
+                >
                     <img class='modal-swiper-image' :src="presetImage">
                 </swiper-slide>
-                <div class="swiper-button-prev" @click='prevModalImage' slot="button-prev"></div>
-                <div class="swiper-button-next" @click='nextModalImage' slot="button-next"></div>
+
+                <div class="swiper-button-prev"
+                     @click='prevModalImage'
+                     slot="button-prev"
+                >
+                </div>
+
+                <div class="swiper-button-next"
+                     @click='nextModalImage'
+                     slot="button-next">
+                </div>
+
               </swiper>
             </b-modal>
           </div>
+
           <div class="">
             <img src="/images/presetcover.jpg" alt="">
           </div>
+
           <div class="">
             <img src="/images/preset3.jpg" alt="">
           </div>
+
           <div class="">
             <img src="/images/preset4.jpg" alt="">
           </div>
@@ -198,31 +249,6 @@ export default {
 </script>
 
 <style media="screen">
-#modal-1 div {
-  background: none !important;
-  border: none !important
-}
-#modal-1 header {
-  border: none !important;
-  padding-top: 1rem ;
-  padding-right: 1rem ;
-  padding-bottom: 0 ;
-  padding-left: 1rem
-}
-
-#modal-1 button {
-  color: white;
-  outline: none
-}
-.modal-swiper-image {
-  width: 100%
-}
-
-.course-sect {
-  background-color: white !important;
-  height: 90%;
-  margin-top: 5vh;
-}
 
 .photosets-container {
   overflow: hidden;
@@ -275,6 +301,33 @@ export default {
   pointer-events: none;
 }
 
+.sidebar-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: justify;
+  width: 80%;
+  /* font-weight: bold; */
+  color: white;
+  opacity: 0;
+}
+
+
+.sidebar-content > span {
+  font-size: 2vh;
+}
+
+.price-class {
+  margin-top: 30px;
+  margin-bottom: 0;
+  color: #777;
+  font-size: 2vh;
+  text-align: center;
+}
+
+/* FLORAL SHOCK container with preset information */
 .preset-bar {
   position: absolute;
   width: 100%;
@@ -298,6 +351,21 @@ export default {
   grid-area: right-description-box;
   display: grid;
   align-content: center;
+}
+
+.preset-title {
+  letter-spacing: 4px;
+  font-weight: bold;
+  font-size: 2vh;
+  text-align: center;
+  margin-bottom: 0
+}
+
+.preset-name {
+  letter-spacing: 4px;
+  font-weight: bold;
+  font-size: 2vh;
+  text-align: center;
 }
 
 .demonstration-image-box {
@@ -324,30 +392,30 @@ export default {
   width: 96%;
 }
 
-.preset-title {
-  letter-spacing: 4px;
-  font-weight: bold;
-  font-size: 2vh;
-  text-align: center;
-  margin-bottom: 0
+#modal-preset div {
+  background: none !important;
+  border: none !important
 }
-.preset-name {
-  letter-spacing: 4px;
-  font-weight: bold;
-  font-size: 2vh;
-  text-align: center;
+#modal-preset header {
+  border: none !important;
+  padding-top: 1rem ;
+  padding-right: 1rem ;
+  padding-bottom: 0 ;
+  padding-left: 1rem
 }
 
-.preset-description {
-  letter-spacing: 2px;
-  font-size: 1.6vh;
-  text-align: justify;
+#modal-preset button {
+  color: white;
+  outline: none
+}
+.modal-swiper-image {
+  width: 100%
 }
 
-.preset-price {
-  color: #777;
-  font-size: 2vh;
-  text-align: center;
+.course-sect {
+  background-color: white !important;
+  height: 90%;
+  margin-top: 5vh;
 }
 
 @media screen and (max-width: 1140px) {
@@ -358,7 +426,7 @@ export default {
     grid-template-areas:
       "right-description-box"
       "demonstration-image-box";
-    align-content: flex-start;
+    /* align-content: flex-start; */
   }
 
   .right-description-box {
@@ -382,58 +450,15 @@ export default {
   }
 }
 
-.sidebar-content {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: justify;
-  width: 80%;
-  font-weight: bold;
-  color: white;
-  opacity: 0;
-}
-
-
-.sidebar-content > span {
-  margin-bottom: 20px;
-  font-size: 20px;
-}
-
 @media screen and (max-width: 500px) {
-  .price-span {
-    font-size: 18px
-  }
   .sidebar-content > span {
-    font-size: 14px;
     margin-bottom: 8px;
 
   }
 
   .photoset-btn {
-    margin-bottom: 5vh;
-    width: 350px;
     font-size: 0.8rem;
-    letter-spacing: 3px;
-    color: white;
-    font-weight: bold;
-    text-transform: uppercase;
   }
 }
 
-.price-span {
-  color: #777;
-  font-size: 25px
-}
-
-.send-btn {
-  color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.close-sidebar-btn {
-  cursor: pointer;
-}
 </style>
