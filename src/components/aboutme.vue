@@ -34,10 +34,19 @@
             <button v-b-modal.about-me-modal>ОБО МНЕ</button>
           </div>
           <b-modal hide-footer centered size='l' class='about-me-modal' id="about-me-modal" cshadow>
-            <div>
-              <p style='color:white'>
-                Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-                in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+            <div style='color:white'>
+              <div class='mb-2 horizontal-line-white'></div>
+              <p class='mobile-name text-center mb-0 mt-0'>Вероника Вегера</p>
+              <p class='mobile-job-title text-center mb-0 mt-0'>Фотограф</p>
+              <div class='mt-2 horizontal-line-white'></div>
+              <p class='mobile-about text-justify mb-2 mt-4'>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                officia deserunt mollit anim id est laborum.
               </p>
             </div>
           </b-modal>
@@ -70,10 +79,9 @@ export default {
 
 #about-me-modal header {
   border: none !important;
-  padding-top: 1rem ;
-  padding-right: 1rem ;
+  padding-top: 0.2rem ;
+  padding-right: 0.5rem ;
   padding-bottom: 0 ;
-  padding-left: 1rem
 }
 
 #about-me-modal button {
@@ -178,6 +186,18 @@ export default {
   font-style: italic;
   text-align: center;
   color: #333;
+}
+
+.mobile-name {
+  font-size: 3vh
+}
+
+.mobile-job-title {
+  font-size: 2.5vh
+}
+
+.mobile-about {
+  font-size: 2vh
 }
 
 .swiper-button-next, .swiper-button-prev {
