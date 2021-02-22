@@ -19,7 +19,10 @@
           <div class="description-image-class">
             <img :src="day.image" alt="">
           </div>
-          <span ref='daysContent' class="days-content" :key='point.id' v-for="point in day.description"> <span style="font-size: 2.5vh">&#9745;</span> {{ point }}</span>
+          <div class='horizontal-line-black mb-3 mt-1' style='background-color: #000000b8; height: 2px'></div>
+          <span ref='daysContent' class="days-content" style="line-height: 2.5vh; padding-bottom: 3px; margin-bottom: 3px; text-indent: 3px; width: 100%" :key='point.id' v-for="point in day.description"> <span style="font-size: 2.5vh; text-indent: 0">&#9900;</span> {{ point }}</span>
+          <div class='mb-4 mt-2 horizontal-line-black' style='background-color: #000000b8; height: 2px'></div>
+
         </div>
       </div>
     </div>
@@ -217,11 +220,11 @@ export default {
   align-content: center;
   pointer-events: none;
   color: black;
-  text-align: justify;
+  text-align: left;
 }
 
 .days-content {
-  font-size: 1.8vh
+  font-size: 1.9vh
 }
 
 @media screen and (max-width: 1100px) {
@@ -240,10 +243,12 @@ export default {
     text-transform: uppercase;
   }
   .education-right-part {
-    justify-content: flex-start;
+    justify-content: center;
   }
   .description-image-class {
-    height: 10vh
+    height: 10vh;
+    margin-bottom: 2vh;
+    margin-top: 0
   }
 }
 </style>
