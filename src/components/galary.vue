@@ -8,8 +8,6 @@
       <div class="swiper-button-prev" @click='prev' slot="button-prev"></div>
       <div class="swiper-button-next" @click='next' slot="button-next"></div>
     </swiper>
-
-
 </template>
 
 <script>
@@ -73,6 +71,7 @@ export default {
 .swiper {
   height: 100%;
   width: 90%;
+  background-color: beige
 }
 
 .swiper-slide {
