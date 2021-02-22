@@ -10,7 +10,7 @@
       <div class='horizontal-line-black' style='margin-top: 0.2rem'></div>
         <div class="" style='display: flex; justify-content: space-evenly; padding: 0.3rem;'>
           <div style='color: black; letter-spacing: 1px; font-size: 2vh' class="">{{ type }}</div>
-          <div style='color: black; letter-spacing: 1px; font-size: 2vh' class="">{{ price }}&#8381;</div>
+          <!-- <div style='color: black; letter-spacing: 1px; font-size: 2vh' class="">{{ price }}&#8381;</div> -->
         </div>
       <div class='mb-4 horizontal-line-black'></div>
       <b-form-input required type="text" placeholder="Как Вас зовут?"></b-form-input>
