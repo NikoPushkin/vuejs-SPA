@@ -5,7 +5,7 @@
         <div class="left-part-content">
           <p>индивидуальное обучение</p>
           <div class="days-btns-container">
-            <button  class='btn-class' @click='openDescription(day.number)' :key='day.id' v-for='day in educationDays'>{{ day.number }}</button>
+            <button  class='btn-class hover-transform-btn day-btn' @click='openDescription(day.number)' :key='day.id' v-for='day in educationDays'>{{ day.number }}</button>
           </div>
         </div>
       </div>
@@ -205,6 +205,12 @@ export default {
   /* font-weight: bold; */
 }
 
+.day-btn:focus {
+  background-color: black;
+  color: white
+
+}
+
 .education-right-part {
   position: absolute;
   width: 50%;
@@ -220,7 +226,7 @@ export default {
   align-content: center;
   pointer-events: none;
   color: black;
-  text-align: left;
+  text-align: center;
 }
 
 .days-content {
