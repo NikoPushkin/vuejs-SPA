@@ -34,10 +34,11 @@
               </span>
             </div>
 
-            <div class='mb-4 horizontal-line-white'></div>
+            <span class='price-class'>{{ service.type }}</span>
+            <div :class='[ screenSize > 1200 ? "mt-4": "mt-2", "mb-4", "horizontal-line-white"]'></div>
             <span>{{ service.description }}</span>
-            <div class='mt-4 horizontal-line-white'></div>
-            <span class='price-class'>Стоимость: {{ service.price }} &#8381;</span>
+            <div :class='[ screenSize > 1200 ? "mb-4": "mb-2", "mt-4", "horizontal-line-white"]'></div>
+            <span class='price-class'>Стоимость: {{ service.price }}&#8381;</span>
             <button class='send-btn btn-class hover-transform-btn'
                     @click='setEmailFormProps(service.price,service.type)'
                     v-b-modal.email-form-modal
@@ -58,22 +59,6 @@
         <div class="right-description-box">
           <p class='preset-title'>Коллекция Авторских пресетов</p>
           <p class='preset-name'>«FLORAL SHOCK»</p>
-
-          <div class="preset-description">
-            <p><b>В коллекцию включено: </b>8 пресетов для Adobe Lightroom + Lightroom Mobile</p>
-            <p><b>Пресеты в 2х форматах: </b>.xmp, .dng;</p>
-            <p>Дополнительно вы получите подробную инструкцию по установке как для компьютерной версии так и для мобильной.</p>
-            <p>ВНИМАНИЕ: При использовании пресетов возможно потребуется редактирование экспозиции, баланса белого или контрастности отдельно для каждого снимка.</p>
-            <p class='price-class'>Стоимость: 1500&#8381;</p>
-            <button class='mb-4 send-btn btn-class hover-transform-btn'
-                    style='color: black'
-                    @click='setEmailFormProps(1500, "Floral shock")'
-                    v-b-modal.email-form-modal
-            >
-              Отправить заявку
-            </button>
-          </div>
-
         </div>
 
         <div ref='presetExamplesBox'
@@ -119,6 +104,23 @@
             <img src="/images/preset4.jpg" alt="">
           </div>
         </div>
+
+        <div class="preset-description">
+          <p style='mb-0'><b>В коллекцию включено: </b>8 пресетов для Adobe Lightroom + Lightroom Mobile</p>
+          <p style='mb-0'><b>Пресеты в 2х форматах: </b>.xmp, .dng;</p>
+          <p style='mb-0'>Дополнительно вы получите подробную инструкцию по установке как для компьютерной версии так и для мобильной.</p>
+          <p style='mb-0'>ВНИМАНИЕ: При использовании пресетов возможно потребуется редактирование экспозиции, баланса белого или контрастности отдельно для каждого снимка.</p>
+          <p class='price-class'>Стоимость: 1500&#8381;</p>
+          <button class='send-btn btn-class hover-transform-btn'
+                  style='color: black'
+                  @click='setEmailFormProps(1500, "Floral shock")'
+                  v-b-modal.email-form-modal
+          >
+            Отправить заявку
+          </button>
+        </div>
+
+
       </div>
     </div>
 
@@ -152,6 +154,7 @@ export default {
       },
       emailFormPrice: '',
       emailFormType: '',
+      screenSize: window.screen.width
     }
   },
 
@@ -320,11 +323,12 @@ export default {
 }
 
 .price-class {
-  margin-top: 30px;
+  margin-top: 0.5rem;
   margin-bottom: 0;
   color: #777;
   font-size: 2vh;
   text-align: center;
+  letter-spacing: 1px
 }
 
 /* FLORAL SHOCK container with preset information */
@@ -338,9 +342,9 @@ export default {
   display: grid;
   align-content: center;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 100%;
   grid-template-areas:
-    "demonstration-image-box right-description-box";
+    "demonstration-image-box right-description-box"
+    "demonstration-image-box preset-description";
   pointer-events: none;
   background: linear-gradient(to left, rgba(250, 250, 250, 1), rgba(230, 230, 230, 1));
 }
@@ -350,7 +354,7 @@ export default {
   color: black;
   grid-area: right-description-box;
   display: grid;
-  align-content: center;
+  align-content: end;
 }
 
 .preset-title {
@@ -369,6 +373,10 @@ export default {
 }
 
 .preset-description {
+  align-content: flex-start;
+  padding: 0 3vw;
+  display: grid;
+  grid-area: preset-description;
   letter-spacing: 2px;
   font-size: 1.6vh;
   text-align: justify;
@@ -428,15 +436,17 @@ export default {
   .preset-bar {
     background: linear-gradient(to bottom, rgba(250, 250, 250, 1), rgba(230, 230, 230, 1));
     grid-template-columns: 100%;
-    grid-template-rows: 70% 15%;
+    /* grid-template-rows: 20% 30% 40%; */
     grid-template-areas:
       "right-description-box"
-      "demonstration-image-box";
-    /* align-content: flex-start; */
+      "demonstration-image-box"
+      "preset-description";
+    align-content: flex-start;
   }
 
   .right-description-box {
     align-content: center;
+    margin-top: 3%
   }
 
   .demonstration-image-box {
@@ -445,7 +455,19 @@ export default {
     grid-template-columns: 20vw 20vw 20vw 20vw;
     grid-template-rows: auto;
     justify-content: space-around;
+    align-content: center;
     padding: 0 10px;
+    margin-bottom: 1.5rem
+  }
+
+  .preset-name {
+    margin-bottom: 1.5rem
+  }
+
+  .preset-description {
+    align-content: start;
+    display: grid;
+    grid-area: preset-description
   }
 }
 
